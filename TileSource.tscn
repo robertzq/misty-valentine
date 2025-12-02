@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://ba8gexjjul835"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_i07ll"]
+size = Vector3(2, 0.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i07ll"]
+size = Vector3(2, 0.5, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gs6mm"]
+size = Vector3(2, 2.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bcfpx"]
+size = Vector3(2, 2.5, 2)
+
+[node name="TileSetSource" type="Node3D"]
+
+[node name="floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_i07ll")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_i07ll")
+
+[node name="wall" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_gs6mm")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="wall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall/StaticBody3D"]
+shape = SubResource("BoxShape3D_bcfpx")

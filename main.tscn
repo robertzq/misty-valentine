@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://do30dlank3a34"]
+[gd_scene load_steps=6 format=3 uid="uid://do30dlank3a34"]
 
 [ext_resource type="PackedScene" uid="uid://otwp070hobta" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="MeshLibrary" uid="uid://fg16h12vpbwp" path="res://my_tiles.tres" id="2_0xm2m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
 albedo_color = Color(1, 0.12941177, 1, 1)
@@ -31,3 +32,11 @@ mesh = SubResource("BoxMesh_0xm2m")
 shape = SubResource("BoxShape3D_h2yge")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="GridMap" type="GridMap" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2968678, -1.1674047, 1.9815036)
+mesh_library = ExtResource("2_0xm2m")
+cell_size = Vector3(2, 1, 2)
+data = {
+"cells": PackedInt32Array(4, 65531, 1, 4, 65532, 1, 4, 65533, 1, 4, 65534, 1)
+}
