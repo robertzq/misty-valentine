@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://otwp070hobta"]
+
+[node name="Player" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
