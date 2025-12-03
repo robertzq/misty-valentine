@@ -1,42 +1,57 @@
 extends CharacterBody3D
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+# --- 变量区 ---
+@onready var nav_agent = $NavigationAgent3D
+@onready var camera = get_viewport().get_camera_3d() # 获取主摄像机
 
-# 获取重力设置 (Project Settings -> Physics -> 3D -> Default Gravity)
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+const SPEED = 5.0
 
 func _physics_process(delta):
-	# 1. 应用重力 (如果在空中，就往下掉)
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-
-	# 2. 处理跳跃 (按下空格键)
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# 3. 获取输入方向 (WASD 或 箭头键)
-	# ui_left, ui_right 等是 Godot 内置的映射
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+	# 1. 检测输入：如果按住了鼠标左键 (或者点击)
+	if Input.is_action_pressed("move_to"):
+		update_target_location()
 		
-		# --- 修复狂抖代码：平滑旋转 ---
-		# 1. 计算目标角度：我们要面向哪个方向？
-		# atan2 是计算坐标点角度的数学函数
-		var target_angle = atan2(-direction.x, -direction.z)
+	# 2. 如果当前有路径，且还没到达终点
+	if not nav_agent.is_navigation_finished():
+		var current_location = global_position
+		var next_location = nav_agent.get_next_path_position()
 		
-		# 2. 平滑插值：让 rotation.y 慢慢变成 target_angle
-		# 15 * delta 是旋转速度，数字越大转得越快。你可以把 15 改成 10 试试感觉。
-		rotation.y = lerp_angle(rotation.y, target_angle, 6 * delta)
-		# ---------------------------
+		# 计算这一帧该往哪个方向走
+		var direction = (next_location - current_location).normalized()
+		
+		# 设置速度
+		velocity = direction * SPEED
+		
+		# --- 平滑旋转 (复制之前的逻辑) ---
+		if direction.length() > 0.1:
+			var target_angle = atan2(direction.x, direction.z)
+			rotation.y = lerp_angle(rotation.y, target_angle, 10 * delta)
+		
+		# 真正移动
+		move_and_slide()
+		
 	else:
-		# 如果没按键，慢慢停下来
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		# 到了或者没目标，停下来
+		velocity = Vector3.ZERO
 
-	# 4. 执行移动 (这是 CharacterBody3D 的核心函数)
-	move_and_slide()
+# --- 核心函数：把鼠标点击转换成 3D 坐标 ---
+func update_target_location():
+	# 获取鼠标在屏幕上的 2D 坐标
+	var mouse_pos = get_viewport().get_mouse_position()
+	
+	# 射线检测三件套
+	var ray_length = 1000
+	var from = camera.project_ray_origin(mouse_pos)
+	var to = from + camera.project_ray_normal(mouse_pos) * ray_length
+	
+	# 发射射线！
+	var space = get_world_3d().direct_space_state
+	var ray_query = PhysicsRayQueryParameters3D.create(from, to)
+	
+	# 这里的 collision_mask = 1 表示只检测第1层的物体（通常地板在第1层）
+	# 建议后面确保地板有 CollisionShape3D
+	var result = space.intersect_ray(ray_query)
+	
+	if result:
+		# result.position 就是鼠标点中的 3D 地面坐标
+		nav_agent.target_position = result.position
