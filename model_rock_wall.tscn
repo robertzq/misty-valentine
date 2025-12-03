@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://crt63a32sau14"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wln6d"]
+frequency = 0.13
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ffww0"]
+resource_name = "_albedo"
+noise = SubResource("FastNoiseLite_wln6d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1oirt"]
+albedo_color = Color(0.67087007, 0.27682298, 0.13837516, 1)
+albedo_texture = SubResource("NoiseTexture2D_ffww0")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="RockWall" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="RockWall"]
+size = Vector3(0.4, 0.4, 0.4)
+material = SubResource("StandardMaterial3D_1oirt")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="RockWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28820682, -0.31312633, 0)
+size = Vector3(0.4, 0.4, 0.4)
+material = SubResource("StandardMaterial3D_1oirt")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="RockWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.054638863, -0.31312633, 0.29225922)
+size = Vector3(0.4, 0.4, 0.4)
+material = SubResource("StandardMaterial3D_1oirt")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="RockWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18432426, -0.31312633, 0.29225922)
+size = Vector3(0.4, 0.4, 0.4)
+material = SubResource("StandardMaterial3D_1oirt")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="RockWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37372613, -0.31312633, 0.29225922)
+size = Vector3(0.4, 0.4, 0.4)
+material = SubResource("StandardMaterial3D_1oirt")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="RockWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37372613, -0.3373897, -0.23652244)
+size = Vector3(0.4, 0.4, 0.4)
+material = SubResource("StandardMaterial3D_1oirt")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="RockWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.055128098, -0.3373897, -0.3806193)
+size = Vector3(0.4, 0.4, 0.4)
+material = SubResource("StandardMaterial3D_1oirt")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="RockWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29191542, -0.095963, -0.3806193)
+size = Vector3(0.4, 0.4, 0.4)
+material = SubResource("StandardMaterial3D_1oirt")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="RockWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4605968, -0.39460266, -0.3806193)
+size = Vector3(0.4, 0.4, 0.4)
+material = SubResource("StandardMaterial3D_1oirt")

@@ -23,6 +23,16 @@ func _physics_process(delta):
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
+		
+		# --- 修复狂抖代码：平滑旋转 ---
+		# 1. 计算目标角度：我们要面向哪个方向？
+		# atan2 是计算坐标点角度的数学函数
+		var target_angle = atan2(-direction.x, -direction.z)
+		
+		# 2. 平滑插值：让 rotation.y 慢慢变成 target_angle
+		# 15 * delta 是旋转速度，数字越大转得越快。你可以把 15 改成 10 试试感觉。
+		rotation.y = lerp_angle(rotation.y, target_angle, 6 * delta)
+		# ---------------------------
 	else:
 		# 如果没按键，慢慢停下来
 		velocity.x = move_toward(velocity.x, 0, SPEED)
