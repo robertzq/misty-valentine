@@ -1,6 +1,25 @@
-[gd_scene load_steps=10 format=3 uid="uid://ba8gexjjul835"]
+[gd_scene load_steps=25 format=3 uid="uid://ba8gexjjul835"]
 
-[ext_resource type="PackedScene" uid="uid://dsg236ljutktf" path="res://rock_wall_model.gltf" id="1_ffww0"]
+[ext_resource type="PackedScene" uid="uid://fl00fl4yaqql" path="res://assets/environment/kaykit_dungeon_remastered/Assets/gltf/wall.gltf.glb" id="1_a2vhi"]
+[ext_resource type="PackedScene" uid="uid://mv3owhxfpvso" path="res://assets/environment/kaykit_dungeon_remastered/Assets/gltf/wall_arched.gltf.glb" id="2_5plyc"]
+[ext_resource type="PackedScene" uid="uid://cvxnuaj8xdlsg" path="res://assets/environment/kaykit_halloween_bits/Assets/gltf/tree_dead_large.gltf" id="3_b5qlb"]
+[ext_resource type="PackedScene" uid="uid://dg8mcwxst2djm" path="res://assets/environment/kaykit_halloween_bits/Assets/gltf/tree_pine_orange_large.gltf" id="4_qy5f4"]
+[ext_resource type="PackedScene" uid="uid://dwc2crglwqsi0" path="res://assets/environment/kaykit_halloween_bits/Assets/gltf/tree_pine_orange_medium.gltf" id="5_2aubk"]
+[ext_resource type="ArrayMesh" uid="uid://c3flw3j46u1yu" path="res://assets/environment/kaykit_dungeon_remastered/Assets/obj/floor_tile_small_broken_B.obj" id="6_fs88f"]
+[ext_resource type="ArrayMesh" uid="uid://blpm1aw2jd4ik" path="res://assets/environment/kaykit_dungeon_remastered/Assets/obj/floor_dirt_small_B.obj" id="7_6wxvl"]
+[ext_resource type="PackedScene" uid="uid://bodxeckmbeyy1" path="res://assets/environment/kaykit_medieval_hexagon_pack/Assets/gltf/decoration/nature/rock_single_B.gltf" id="8_j1mbx"]
+[ext_resource type="PackedScene" uid="uid://bjqx2ujte38rt" path="res://assets/environment/kaykit_medieval_hexagon_pack/Assets/gltf/decoration/nature/rock_single_D.gltf" id="9_1yr37"]
+[ext_resource type="PackedScene" uid="uid://bhgr2wxa8mpsn" path="res://assets/environment/kaykit_medieval_hexagon_pack/Assets/gltf/decoration/nature/mountain_A_grass.gltf" id="10_yc7q4"]
+[ext_resource type="PackedScene" uid="uid://ds0wqo0dou8nj" path="res://assets/environment/kaykit_medieval_hexagon_pack/Assets/gltf/decoration/nature/mountain_C_grass.gltf" id="11_4t17u"]
+[ext_resource type="PackedScene" uid="uid://k7xfm0u6etxf" path="res://assets/environment/kaykit_medieval_hexagon_pack/Assets/gltf/decoration/nature/mountain_B_grass_trees.gltf" id="12_m2wu3"]
+[ext_resource type="PackedScene" uid="uid://d2ke4wjs5hopo" path="res://assets/environment/kaykit_medieval_hexagon_pack/Assets/gltf/decoration/nature/mountain_B_grass.gltf" id="13_4r07r"]
+[ext_resource type="PackedScene" uid="uid://b2e3qn21gca1p" path="res://assets/environment/kaykit_medieval_hexagon_pack/Assets/gltf/tiles/base/hex_grass_bottom.gltf" id="14_y6bns"]
+[ext_resource type="PackedScene" uid="uid://obfv78ejxfmt" path="res://assets/environment/kaykit_medieval_hexagon_pack/Assets/gltf/tiles/roads/hex_road_M.gltf" id="15_1b32n"]
+[ext_resource type="PackedScene" uid="uid://dgrx5b4m2bibj" path="res://assets/environment/kaykit_halloween_bits/Assets/gltf/path_A.gltf" id="16_h4xit"]
+[ext_resource type="PackedScene" uid="uid://d1jb7qp221f3v" path="res://assets/environment/kaykit_halloween_bits/Assets/gltf/path_C.gltf" id="17_sib8t"]
+[ext_resource type="PackedScene" uid="uid://le2um6a438cu" path="res://assets/environment/kaykit_halloween_bits/Assets/gltf/path_B.gltf" id="18_lyqx8"]
+[ext_resource type="PackedScene" uid="uid://c1yno7bjv5a04" path="res://assets/environment/kaykit_medieval_hexagon_pack/Assets/gltf/tiles/rivers/hex_river_J.gltf" id="20_qy5f4"]
+[ext_resource type="PackedScene" uid="uid://ydh1mt1bpevl" path="res://assets/environment/kaykit_medieval_hexagon_pack/Assets/gltf/tiles/rivers/hex_river_D.gltf" id="21_2aubk"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_i07ll"]
 size = Vector3(2, 0.5, 2)
@@ -13,19 +32,6 @@ size = Vector3(2, 2.5, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bcfpx"]
 size = Vector3(2, 2.5, 2)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ro1x7"]
-frequency = 0.13
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tbr4f"]
-noise = SubResource("FastNoiseLite_ro1x7")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbr4f"]
-albedo_color = Color(0.67087007, 0.27682298, 0.13837516, 1)
-albedo_texture = SubResource("NoiseTexture2D_tbr4f")
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ly0om"]
-points = PackedVector3Array(0.19111364, 0.19669336, 0.19999999, -0.6567503, -0.59459996, -0.5775608, -0.66971743, -0.60371745, -0.17022146, 0.46685952, -0.51309997, 0.19921929, -0.5675751, -0.113233395, 0.49229997, -0.08620003, 0.10737485, -0.58971745, 0.14314668, -0.5374, -0.57196337, -0.4919, 0.097576305, -0.5718978, 0.4733421, -0.114869356, -0.19999999, 0.3631338, -0.51309997, 0.47582352, -0.5527493, -0.51309997, 0.47582352, 0.37741253, -0.11331195, 0.49229997, -0.66971743, -0.18443565, -0.58971745, -0.19999999, 0.17247665, 0.18493645, 0.1934615, 0.19999632, -0.19999999, -0.2502429, -0.60371745, -0.58971745, 0.46685952, -0.51309997, -0.19817725, -0.50556034, 0.10737485, -0.17022146, -0.66971743, -0.18443565, -0.17022146, 0.46864453, -0.11552892, 0.19999999, 0.12205676, -0.1374, -0.52329135, -0.19999999, 0.17247665, -0.18899499)
 
 [node name="TileSetSource" type="Node3D"]
 
@@ -47,63 +53,64 @@ mesh = SubResource("BoxMesh_gs6mm")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="wall/StaticBody3D"]
 shape = SubResource("BoxShape3D_bcfpx")
 
-[node name="RockWall" type="CSGCombiner3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.310125, 0, 0)
-use_collision = true
+[node name="wall_gltf" parent="." instance=ExtResource("1_a2vhi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1235933, -0.88288796, -0.7189815)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RockWall"]
-size = Vector3(0.4, 0.4, 0.4)
-material = SubResource("StandardMaterial3D_tbr4f")
+[node name="wall_arched_gltf" parent="." instance=ExtResource("2_5plyc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.60817385, 0, 6.491867)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="RockWall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28820682, -0.31312633, 0)
-size = Vector3(0.4, 0.4, 0.4)
-material = SubResource("StandardMaterial3D_tbr4f")
+[node name="tree_dead_large2" parent="." instance=ExtResource("3_b5qlb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7478433, 0, 5.225594)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="RockWall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.054638863, -0.31312633, 0.29225922)
-size = Vector3(0.4, 0.4, 0.4)
-material = SubResource("StandardMaterial3D_tbr4f")
+[node name="tree_pine_orange_large2" parent="." instance=ExtResource("4_qy5f4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.438631, 0, 4.604279)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="RockWall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18432426, -0.31312633, 0.29225922)
-size = Vector3(0.4, 0.4, 0.4)
-material = SubResource("StandardMaterial3D_tbr4f")
+[node name="tree_pine_orange_medium2" parent="." instance=ExtResource("5_2aubk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7385397, 0, -3.8463182)
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="RockWall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37372613, -0.31312633, 0.29225922)
-size = Vector3(0.4, 0.4, 0.4)
-material = SubResource("StandardMaterial3D_tbr4f")
+[node name="FloorTileSmallBrokenB" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6679792, 0, 7.4823794)
+mesh = ExtResource("6_fs88f")
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="RockWall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37372613, -0.3373897, -0.23652244)
-size = Vector3(0.4, 0.4, 0.4)
-material = SubResource("StandardMaterial3D_tbr4f")
+[node name="FloorDirtSmallB" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51691175, 0, 9.200172)
+mesh = ExtResource("7_6wxvl")
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="RockWall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.055128098, -0.3373897, -0.3806193)
-size = Vector3(0.4, 0.4, 0.4)
-material = SubResource("StandardMaterial3D_tbr4f")
+[node name="rock_single_B2" parent="." instance=ExtResource("8_j1mbx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.548094, 0, 4.793439)
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="RockWall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29191542, -0.095963, -0.3806193)
-size = Vector3(0.4, 0.4, 0.4)
-material = SubResource("StandardMaterial3D_tbr4f")
+[node name="rock_single_D2" parent="." instance=ExtResource("9_1yr37")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1211956, 0, 9.393812)
 
-[node name="CSGBox3D9" type="CSGBox3D" parent="RockWall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4605968, -0.39460266, -0.3806193)
-size = Vector3(0.4, 0.4, 0.4)
-material = SubResource("StandardMaterial3D_tbr4f")
+[node name="mountain_A_grass2" parent="." instance=ExtResource("10_yc7q4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3721313, 0, 9.614548)
 
-[node name="Node3D" parent="." instance=ExtResource("1_ffww0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+[node name="mountain_C_grass2" parent="." instance=ExtResource("11_4t17u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.085972, 0, 4.100275)
 
-[node name="RockWall2" parent="Node3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50587565, 0)
+[node name="mountain_B_grass_trees2" parent="." instance=ExtResource("12_m2wu3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.7683325, -1.1920929e-07, 6.248718)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Node3D/RockWall2" index="9"]
+[node name="mountain_B_grass2" parent="." instance=ExtResource("13_4r07r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.364201, -1.1920929e-07, 0.86909825)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RockWall2/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_ly0om")
+[node name="hex_grass_bottom2" parent="." instance=ExtResource("14_y6bns")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5300837, 0, -4.775006)
 
-[editable path="Node3D"]
+[node name="hex_road_M2" parent="." instance=ExtResource("15_1b32n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0651317, 0, -7.5655746)
+
+[node name="path_A2" parent="." instance=ExtResource("16_h4xit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.897473, 0, -5.802918)
+
+[node name="path_C2" parent="." instance=ExtResource("17_sib8t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.475581, 0, -8.073452)
+
+[node name="path_B2" parent="." instance=ExtResource("18_lyqx8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.750532, 0, 2.2068007)
+
+[node name="hex_river_J2" parent="." instance=ExtResource("20_qy5f4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.929352, 0, -4.684991)
+
+[node name="hex_river_D2" parent="." instance=ExtResource("21_2aubk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.302456, 0, -11.228144)
