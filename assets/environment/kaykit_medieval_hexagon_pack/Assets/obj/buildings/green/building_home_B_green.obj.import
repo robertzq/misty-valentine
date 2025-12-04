@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cxn22koc47ngq"
+path="res://.godot/imported/building_home_B_green.obj-86a9b06cfe325b69b98556b4e6f445fd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/building_home_B_green.obj-86a9b06cfe325b69b98556b4e6f445fd.mesh"]
+
+source_file="res://assets/environment/kaykit_medieval_hexagon_pack/Assets/obj/buildings/green/building_home_B_green.obj"
+dest_files=["res://.godot/imported/building_home_B_green.obj-86a9b06cfe325b69b98556b4e6f445fd.mesh", "res://.godot/imported/building_home_B_green.obj-86a9b06cfe325b69b98556b4e6f445fd.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

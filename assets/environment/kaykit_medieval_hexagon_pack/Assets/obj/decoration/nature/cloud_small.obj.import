@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dqq670qjb4stn"
+path="res://.godot/imported/cloud_small.obj-f088f4bc9f7741f6867da4e0278d4fee.mesh"
+
+[deps]
+
+files=["res://.godot/imported/cloud_small.obj-f088f4bc9f7741f6867da4e0278d4fee.mesh"]
+
+source_file="res://assets/environment/kaykit_medieval_hexagon_pack/Assets/obj/decoration/nature/cloud_small.obj"
+dest_files=["res://.godot/imported/cloud_small.obj-f088f4bc9f7741f6867da4e0278d4fee.mesh", "res://.godot/imported/cloud_small.obj-f088f4bc9f7741f6867da4e0278d4fee.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
