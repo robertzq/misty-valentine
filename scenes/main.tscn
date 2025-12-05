@@ -45,10 +45,9 @@ volumetric_fog_albedo = Color(0.7411765, 1, 1, 1)
 [node name="world" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28995097, 2.0438433, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28995097, 1.3840742, 0)
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Player"]
-debug_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target_character")]
 transform = Transform3D(0.70710677, -0.35355338, 0.6123724, 0, 0.8660254, 0.5, -0.70710677, -0.35355338, 0.6123724, 10, 10, 10)
