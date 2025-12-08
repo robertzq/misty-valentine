@@ -1,0 +1,19 @@
+extends Node
+
+# 信号：当碎片数量变化时，发出通知（方便以后UI更新）
+signal score_changed(current_score)
+signal all_collected # 集齐9个的信号
+
+var current_score = 0
+const TARGET_SCORE = 9
+
+func add_score():
+	current_score += 1
+	print("当前收集进度: ", current_score, "/", TARGET_SCORE)
+	
+	# 发出信号通知全世界
+	score_changed.emit(current_score)
+	
+	if current_score >= TARGET_SCORE:
+		print("🎉 碎片集齐了！去开宝箱吧！")
+		all_collected.emit()
