@@ -11,6 +11,7 @@ emission_enabled = true
 
 [sub_resource type="Animation" id="Animation_ua2y8"]
 resource_name = "float"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
