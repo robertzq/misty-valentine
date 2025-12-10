@@ -10,7 +10,7 @@ func _ready():
 
 func _physics_process(delta):
 	# 向前飞行 (Z轴负方向)
-	position -= transform.basis.z * speed * delta
+	position += transform.basis.z * speed * delta
 
 func _on_body_entered(body):
 	# 碰到墙壁

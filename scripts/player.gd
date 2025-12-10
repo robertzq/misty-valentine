@@ -70,7 +70,7 @@ func shoot():
 	
 	# 3. 设置子弹位置和朝向
 	bullet.global_position = muzzle.global_position
-	bullet.global_rotation = global_rotation # 子弹朝向和人一样
+	bullet.global_rotation = muzzle.global_rotation # 子弹朝向和人一样
 	
 	# 4. 播放攻击动画 (如果有)
 	# anim_player.play("Attack(1h)")
