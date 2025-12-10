@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dc78d68445pbs"]
+
+[ext_resource type="PackedScene" uid="uid://b50ywwfldqgao" path="res://assets/characters/kaykit_character_pack_skeletons/Characters/gltf/Skeleton_Rogue.glb" id="1_bo3t2"]
+[ext_resource type="Script" uid="uid://bjcste8h6dc8g" path="res://scripts/Ghost.gd" id="1_ggg0v"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ggg0v"]
+radius = 0.65
+height = 1.5
+
+[node name="Ghost" type="CharacterBody3D"]
+script = ExtResource("1_ggg0v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+shape = SubResource("CapsuleShape3D_ggg0v")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Skeleton_Rogue" parent="." instance=ExtResource("1_bo3t2")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)

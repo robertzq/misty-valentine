@@ -11,7 +11,7 @@ height = 1.0
 density = -20.0
 edge_fade = 1.0
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("1_4flbx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -100,5 +100,8 @@ transform = Transform3D(0.9997204, -1.4014349e-09, 0.023646597, 1.3934147e-09, 0
 
 [node name="chest" parent="Mage/Rig/Skeleton3D" index="3"]
 transform = Transform3D(0.9962748, -5.1496167e-09, 0.08623532, 5.1304343e-09, 0.99999994, 4.4407705e-10, -0.08623532, 1.8800718e-15, 0.9962748, -2.9196552e-09, 0.9590293, 1.0685902e-15)
+
+[node name="Muzzle" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.022591352, 0.36092556, 0.7943796)
 
 [editable path="Mage"]

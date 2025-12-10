@@ -5,7 +5,10 @@ extends CharacterBody3D
 @onready var nav_agent = $NavigationAgent3D
 @onready var camera = get_viewport().get_camera_3d()
 @onready var anim_player = $Mage/AnimationPlayer
+@onready var muzzle = $Muzzle
 const SPEED = 5.0
+# 预加载子弹场景
+var bullet_scene = preload("res://scenes/MagicMissile.tscn")
 
 # --- 1. 这里是你漏掉的关键部分：初始化 ---
 func _ready():
@@ -15,7 +18,8 @@ func _physics_process(delta):
 	# 检测鼠标输入
 	if Input.is_action_pressed("move_to"):
 		update_target_location()
-		
+	if Input.is_action_just_pressed("attack"): # 记得去项目设置里绑定 attack 键
+		shoot()	
 	# 导航逻辑
 	if not nav_agent.is_navigation_finished():
 		var current_location = global_position
@@ -57,3 +61,16 @@ func update_target_location():
 	
 	if result:
 		nav_agent.target_position = result.position
+func shoot():
+	# 1. 实例化子弹
+	var bullet = bullet_scene.instantiate()
+	
+	# 2. 加到场景里 (加到 World 根节点下，不要加到 Player 下，否则子弹会跟着人跑)
+	get_parent().add_child(bullet)
+	
+	# 3. 设置子弹位置和朝向
+	bullet.global_position = muzzle.global_position
+	bullet.global_rotation = global_rotation # 子弹朝向和人一样
+	
+	# 4. 播放攻击动画 (如果有)
+	# anim_player.play("Attack(1h)")
