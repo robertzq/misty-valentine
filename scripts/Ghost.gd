@@ -2,74 +2,103 @@ extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
 @onready var anim_player = $Skeleton_Rogue/AnimationPlayer
-# 预加载特效
 var purify_effect_scene = preload("res://scenes/PurifyEffect.tscn")
 
-# --- ⚙️ 新增配置区域 ---
+# --- 配置参数 ---
 @export var speed = 2.0 
-@export var detection_range = 8.0  # 警戒距离：小于这个距离开始追
-@export var give_up_range = 12.0   # 放弃距离：大于这个距离就不追了
-# --------------------
+@export var detection_range = 8.0  # 警戒范围
+@export var give_up_range = 12.0   # 脱战范围
+@export var attack_range = 1.5     # ⚔️ 攻击范围 (必须很近才能打到)
+@export var attack_cooldown = 1.5  # ⚔️ 攻击冷却 (几秒咬一口)
 
 var player = null
-var is_chasing = false # 记录当前状态：是不是正在追人
+var is_chasing = false
+var time_since_last_attack = 0.0 # 计时器
 
 func _ready():
 	player = get_tree().get_first_node_in_group("Player")
-	
-	if anim_player:
-		anim_player.play("Idle")
+	if anim_player: anim_player.play("Idle")
 
 func _physics_process(delta):
+	# 计时器累加
+	time_since_last_attack += delta
+	
 	if not player: return
 	
-	# 1. 计算和玩家的距离
 	var dist = global_position.distance_to(player.global_position)
 	
-	# 2. 状态判断机
+	# --- 1. 状态机 (追还是不追) ---
 	if is_chasing:
-		# 如果正在追，但这人跑得太远了 (超过放弃距离)，就不追了
 		if dist > give_up_range:
 			is_chasing = false
-			velocity = Vector3.ZERO # 立刻停下
+			velocity = Vector3.ZERO
 	else:
-		# 如果没在追，但这人走得太近了 (进入警戒距离)，开始追！
 		if dist < detection_range:
 			is_chasing = true
 
-	# 3. 根据状态执行动作
+	# --- 2. 行为逻辑 ---
 	if is_chasing:
-		# --- 只有在追的时候才寻路 ---
-		nav_agent.target_position = player.global_position
-		var next_pos = nav_agent.get_next_path_position()
-		var current_pos = global_position
-		var direction = (next_pos - current_pos).normalized()
-		
-		velocity = direction * speed
-		
-		# 旋转面向
-		if direction.length() > 0.1:
-			var target_angle = atan2(direction.x, direction.z)
-			rotation.y = lerp_angle(rotation.y, target_angle, 5 * delta)
-	else:
-		# 如果不追，速度归零 (或者你可以在这里写巡逻逻辑)
-		velocity = Vector3.ZERO
-
-	# 4. 执行移动
-	move_and_slide()
-	
-	# 5. 动画状态切换 (逻辑不变，velocity 为 0 时自动播 Idle)
-	if anim_player:
-		if velocity.length() > 0.1:
-			if anim_player.current_animation != "Walking_A":
-				anim_player.play("Walking_A")
+		# ⚔️ 新增：攻击逻辑
+		# 如果距离足够近，并且冷却时间到了
+		if dist <= attack_range:
+			# 到了攻击范围，先停下，别穿过玩家身体
+			velocity = Vector3.ZERO 
+			
+			if time_since_last_attack > attack_cooldown:
+				attack_player()
 		else:
-			if anim_player.current_animation != "Idle":
-				anim_player.play("Idle")
+			# 距离不够，继续追
+			move_towards_player(delta)
+	else:
+		velocity = Vector3.ZERO
+		# 这里如果不动，也可以加个自动回血之类的
 
-# --- 受伤逻辑 ---
-func take_damage(_amount): # 加了下划线，消除未使用参数的警告
-	print("怪物被打中了！")
+	move_and_slide()
+	update_animation()
+
+# 封装的移动函数，保持代码整洁
+func move_towards_player(delta):
+	nav_agent.target_position = player.global_position
+	var next_pos = nav_agent.get_next_path_position()
+	var dir = (next_pos - global_position).normalized()
+	velocity = dir * speed
+	
+	# 面向玩家
+	if dir.length() > 0.1:
+		var target_angle = atan2(dir.x, dir.z)
+		rotation.y = lerp_angle(rotation.y, target_angle, 5 * delta)
+
+# ⚔️ 攻击动作
+func attack_player():
+	time_since_last_attack = 0.0 # 重置冷却
+	
+	print("幽灵发动攻击！")
+	
+	# 1. 播放攻击动画 (如果有的话，KayKit通常叫 Attack(1h) 或 Attack)
+	if anim_player and anim_player.has_animation("Attack(1h)"):
+		anim_player.play("Attack(1h)")
+	
+	# 2. 扣主角的血
+	if player.has_method("take_damage"):
+		player.take_damage(1)
+
+# 动画管理
+func update_animation():
+	if not anim_player: return
+	
+	# 如果正在播放攻击动画，就别切成走路了，等它播完
+	if anim_player.current_animation == "Attack(1h)":
+		return
+
+	if velocity.length() > 0.1:
+		if anim_player.current_animation != "Walking_A":
+			anim_player.play("Walking_A")
+	else:
+		if anim_player.current_animation != "Idle":
+			anim_player.play("Idle")
+
+# --- 受伤与死亡 ---
+func take_damage(_amount):
 	purify()
 
 func purify():

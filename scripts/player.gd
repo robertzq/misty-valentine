@@ -6,14 +6,30 @@ extends CharacterBody3D
 @onready var camera = get_viewport().get_camera_3d()
 @onready var anim_player = $Mage/AnimationPlayer
 @onready var muzzle = $Muzzle
+@onready var body_mesh = $Mage/Rig/Skeleton3D/Mage_Body # ⚠️修改：请把你主角模型的名字填在这里，用来做受伤变红闪烁
+
 const SPEED = 5.0
 # 预加载子弹场景
 var bullet_scene = preload("res://scenes/MagicMissile.tscn")
 var is_attacking = false # <--- 1. 新增这个变量
 
+var max_hp = 5 # 只有3滴血，硬核一点
+var current_hp = 3
+var is_invincible = false # 无敌时间（防止一秒钟被咬死）
+
 # --- 1. 这里是你漏掉的关键部分：初始化 ---
 func _ready():
+	current_hp = max_hp
 	print("我的动画列表: ", anim_player.get_animation_list())
+	
+	# --- 🛡️ 关键保护代码：让这个主角的材质独立出来 ---
+	if body_mesh:
+		# 获取原本的材质
+		var source_mat = body_mesh.get_active_material(0)
+		if source_mat:
+			# 复制一份新的，专门给这个主角用，随便怎么变色都不会影响源文件
+			var unique_mat = source_mat.duplicate()
+			body_mesh.set_surface_override_material(0, unique_mat)
 
 func _physics_process(delta):
 	# 检测鼠标输入
@@ -119,3 +135,33 @@ func get_nearest_enemy():
 			nearest_enemy = enemy
 			
 	return nearest_enemy
+
+# --- ❤️ 受伤函数 ---
+func take_damage(amount):
+	if is_invincible: return 
+	
+	current_hp -= amount
+	print("😱 乌拉受伤了！剩余血量: ", current_hp)
+	
+	# --- 🔴 3D 受伤变红特效 ---
+	if body_mesh:
+		# 获取材质
+		var mat = body_mesh.get_active_material(0) # 获取第0号材质
+		if mat:
+			var tween = create_tween()
+			# 1. 瞬间变红 (修改 albedo_color，不是 modulate)
+			tween.tween_property(mat, "albedo_color", Color(1, 0, 0), 0.1) 
+			# 2. 变回原色 (白色 = 正常贴图颜色)
+			tween.tween_property(mat, "albedo_color", Color(1, 1, 1), 0.1) 
+	
+	# 死亡判定
+	if current_hp <= 0:
+		die()
+	else:
+		is_invincible = true
+		await get_tree().create_timer(1.0).timeout
+		is_invincible = false
+
+func die():
+	print("💀 游戏结束！")
+	get_tree().reload_current_scene()
