@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dmj051n5msw1i"]
+[gd_scene load_steps=12 format=3 uid="uid://dmj051n5msw1i"]
 
 [ext_resource type="Script" uid="uid://biu5x1an5x1rj" path="res://scripts/MagicMissile.gd" id="1_geqq2"]
 
@@ -13,6 +13,7 @@ emission = Color(0, 1, 1, 1)
 emission_energy_multiplier = 5.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_j0vxw"]
+radius = 0.3
 
 [sub_resource type="Gradient" id="Gradient_gbdj8"]
 offsets = PackedFloat32Array(0.008710802, 1)
@@ -42,10 +43,9 @@ scale_curve = SubResource("CurveTexture_gc3dg")
 color_ramp = SubResource("GradientTexture1D_6h0lx")
 color_initial_ramp = SubResource("GradientTexture1D_d8x8w")
 
-[sub_resource type="BoxMesh" id="BoxMesh_gxcpl"]
-size = Vector3(0.2, 0.2, 0.2)
-
 [node name="Area3D" type="Area3D"]
+collision_layer = 15
+collision_mask = 15
 script = ExtResource("1_geqq2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -57,6 +57,5 @@ shape = SubResource("SphereShape3D_j0vxw")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 process_material = SubResource("ParticleProcessMaterial_rvk2x")
-draw_pass_1 = SubResource("BoxMesh_gxcpl")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]

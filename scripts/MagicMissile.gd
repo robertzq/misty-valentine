@@ -1,6 +1,6 @@
 extends Area3D
 
-var speed = 15.0 # 辉石魔法通常很快
+var speed = 1.0 # 辉石魔法通常很快
 var damage = 1
 
 func _ready():
@@ -11,15 +11,30 @@ func _ready():
 func _physics_process(delta):
 	# 向前飞行 (Z轴负方向)
 	position += transform.basis.z * speed * delta
+	# --- 暴力手动检测 ---
+	# 获取当前重叠的所有 Body
+	var bodies = get_overlapping_bodies()
+	for body in bodies:
+		if body.name == "Player": continue # 忽略自己
+		
+		if body.has_method("take_damage"):
+			print("暴力检测打中了: ", body.name)
+			body.take_damage(1)
+			explode()
+			break # 打中一个就销毁，别穿透
 
 func _on_body_entered(body):
-	# 碰到墙壁
-	if body.is_in_group("Wall") or body.name == "BigFloor": 
-		explode()
+	if body.name == "Player": 
+		return
+	# 调试：看看撞到了谁
+	print("子弹撞到了: ", body.name)
+	
 	
 	# 碰到敌人 (假设敌人有 take_damage 方法)
 	if body.has_method("take_damage"):
 		body.take_damage(damage)
+		explode()
+	else:
 		explode()
 
 func explode():

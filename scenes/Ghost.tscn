@@ -7,7 +7,7 @@
 radius = 0.65
 height = 1.5
 
-[node name="Ghost" type="CharacterBody3D"]
+[node name="Ghost" type="CharacterBody3D" groups=["Enemy"]]
 script = ExtResource("1_ggg0v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

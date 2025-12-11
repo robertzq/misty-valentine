@@ -2,6 +2,8 @@ extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
 @onready var anim_player =  $Skeleton_Rogue/AnimationPlayer
+# 预加载特效 (把刚才做的场景拖进来)
+var purify_effect_scene = preload("res://scenes/PurifyEffect.tscn")
 var speed = 2.0 # 怪物速度，如果觉得太慢可以改成 3.0 或 4.0
 var player = null
 
@@ -50,4 +52,13 @@ func take_damage(amount):
 	purify()
 
 func purify():
+	# 1. 生成特效
+	var effect = purify_effect_scene.instantiate()
+	get_parent().add_child(effect) # 加到世界上，别加给自己(因为自己马上要没了)
+	effect.global_position = global_position # 位置对齐
+	
+	# 2. (可选) 掉落奖励？
+	# 比如有几率掉个回血的爱心
+	
+	# 3. 销毁自己
 	queue_free()
