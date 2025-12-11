@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://jvs4f5she6ub"]
+
+[ext_resource type="Script" uid="uid://bnh2dweiwaes7" path="res://scripts/purify_effect.gd" id="1_1kxpx"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_usjw7"]
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, -5, 0)
+color = Color(0.8566631, 0.5736034, 0.77395016, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gq7nh"]
+emission_enabled = true
+emission = Color(1, 0.64174783, 0.58665043, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_wql6l"]
+material = SubResource("StandardMaterial3D_gq7nh")
+radius = 0.1
+height = 0.2
+
+[node name="PurifyEffect" type="GPUParticles3D"]
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_usjw7")
+draw_pass_1 = SubResource("SphereMesh_wql6l")
+script = ExtResource("1_1kxpx")

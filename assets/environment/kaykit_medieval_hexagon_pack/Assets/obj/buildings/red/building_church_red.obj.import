@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bdloafi6k5k6s"
+path="res://.godot/imported/building_church_red.obj-8731164e3387c5a7adb40707be29038c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/building_church_red.obj-8731164e3387c5a7adb40707be29038c.mesh"]
+
+source_file="res://assets/environment/kaykit_medieval_hexagon_pack/Assets/obj/buildings/red/building_church_red.obj"
+dest_files=["res://.godot/imported/building_church_red.obj-8731164e3387c5a7adb40707be29038c.mesh", "res://.godot/imported/building_church_red.obj-8731164e3387c5a7adb40707be29038c.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
