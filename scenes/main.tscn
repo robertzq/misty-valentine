@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://do30dlank3a34"]
+[gd_scene load_steps=28 format=3 uid="uid://do30dlank3a34"]
 
 [ext_resource type="PackedScene" uid="uid://cj8yh738gwqtx" path="res://scenes/FinalPainting.tscn" id="1_muem4"]
 [ext_resource type="PackedScene" uid="uid://5k1h5ukokfjl" path="res://scenes/player.tscn" id="1_sugp2"]
@@ -56,6 +56,8 @@ ambient_light_energy = 1.5
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.08
 volumetric_fog_albedo = Color(0.7411765, 1, 1, 1)
+
+[sub_resource type="Theme" id="Theme_jbj1t"]
 
 [node name="world" type="Node3D"]
 
@@ -170,14 +172,41 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, -0.8399572, -15)
 [node name="Ghost10" parent="." instance=ExtResource("14_a8y0u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, -0.8399572, -1)
 
+[node name="FinalPaint" parent="." instance=ExtResource("1_muem4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, -1)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("15_jkv2x")
 
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
-offset_right = 4.0
-offset_bottom = 27.0
+[node name="HealthContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_right = 336.0
+offset_bottom = 92.0
+theme_override_constants/separation = 5
 
-[node name="FinalPaint" parent="." instance=ExtResource("1_muem4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, -1)
+[node name="HealthIcon1" type="ColorRect" parent="CanvasLayer/HealthContainer"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+theme = SubResource("Theme_jbj1t")
+color = Color(1, 0, 0, 1)
+
+[node name="HealthIcon2" type="ColorRect" parent="CanvasLayer/HealthContainer"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+color = Color(1, 0, 0, 1)
+
+[node name="HealthIcon3" type="ColorRect" parent="CanvasLayer/HealthContainer"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+color = Color(1, 0, 0, 1)
+
+[node name="HealthIcon4" type="ColorRect" parent="CanvasLayer/HealthContainer"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+color = Color(1, 0, 0, 1)
+
+[node name="HealthIcon5" type="ColorRect" parent="CanvasLayer/HealthContainer"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+color = Color(1, 0, 0, 1)
 
 [editable path="Chest"]
