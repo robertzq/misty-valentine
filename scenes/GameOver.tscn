@@ -9,8 +9,10 @@ font_size = 48
 script = ExtResource("1_6bcno")
 
 [node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 343.0
+offset_top = 219.0
+offset_right = 775.0
+offset_bottom = 288.0
 text = "不要急，我们慢慢来"
 label_settings = SubResource("LabelSettings_tvctj")
 horizontal_alignment = 1

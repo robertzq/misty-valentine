@@ -263,12 +263,11 @@ shape = SubResource("ConvexPolygonShape3D_nvn5q")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.929352, 0, -4.684991)
 
 [node name="hex_river_J" parent="hex_river_J2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.270715, 4.5809116)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.581)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="hex_river_J2/hex_river_J" index="0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hex_river_J2/hex_river_J/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.054689407, 0)
 shape = SubResource("ConvexPolygonShape3D_0k0is")
 
 [node name="hex_river_D2" parent="." instance=ExtResource("21_2aubk")]

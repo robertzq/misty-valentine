@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MistyValentine"
-run/main_scene="uid://cgxktxkde41ao"
+run/main_scene="uid://do30dlank3a34"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
