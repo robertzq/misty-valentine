@@ -129,7 +129,7 @@ func start_performance():
 	full_painting.visible = true
 	
 	# --- 📜 第5步：信件浮现 ---
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(5.0).timeout
 	if letter_ui:
 		letter_ui.visible = true
 		var ui_tween = create_tween()
