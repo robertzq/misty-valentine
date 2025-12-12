@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cj8yh738gwqtx"]
+[gd_scene load_steps=16 format=3 uid="uid://cj8yh738gwqtx"]
 
 [ext_resource type="Script" uid="uid://doitv7orrj7fc" path="res://scripts/FinalPainting.gd" id="1_fxelm"]
 [ext_resource type="Texture2D" uid="uid://cxas37r11fu0p" path="res://textures/UlaPic.jpg" id="1_karfh"]
@@ -21,27 +21,6 @@ size = Vector3(3, 2, 0.15)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_karfh"]
 albedo_color = Color(0.36078432, 0.2509804, 0.2, 1)
 roughness = 0.8
-
-[sub_resource type="GDScript" id="GDScript_7qksr"]
-script/source = "# 在脚本最上面加
-@onready var letter_ui = $CanvasLayer 
-
-# 在 start_performance 的最后加
-func start_performance():
-    # ... (前面的代码) ...
-    await tween.finished
-    # ... (融合代码) ...
-    
-    # 延迟 1 秒后显示信件
-    await get_tree().create_timer(1.0).timeout
-    letter_ui.visible = true
-    
-    # 这里可以加个从透明变实体的淡入动画，更高级一点
-    var ui_tween = create_tween()
-    letter_ui.offset.y = 50 # 先往下偏移一点
-    letter_ui.modulate.a = 0 # 透明
-    ui_tween.tween_property(letter_ui, \"modulate:a\", 1.0, 2.0) # 淡入
-    ui_tween.parallel().tween_property(letter_ui, \"offset:y\", 0, 2.0) # 上浮"
 
 [sub_resource type="LabelSettings" id="LabelSettings_fxelm"]
 font_size = 48
@@ -98,7 +77,6 @@ texture = ExtResource("10_6ytmt")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 visible = false
-script = SubResource("GDScript_7qksr")
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
 anchors_preset = 15

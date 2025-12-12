@@ -1,5 +1,6 @@
-[gd_scene load_steps=26 format=3 uid="uid://do30dlank3a34"]
+[gd_scene load_steps=27 format=3 uid="uid://do30dlank3a34"]
 
+[ext_resource type="PackedScene" uid="uid://cj8yh738gwqtx" path="res://scenes/FinalPainting.tscn" id="1_muem4"]
 [ext_resource type="PackedScene" uid="uid://5k1h5ukokfjl" path="res://scenes/player.tscn" id="1_sugp2"]
 [ext_resource type="Script" uid="uid://b4kb3xps0j7ge" path="res://scripts/CameraFollow.gd" id="2_jyhfs"]
 [ext_resource type="MeshLibrary" uid="uid://cflr1bgbr7wbn" path="res://my_tiles.tres" id="3_tbgi4"]
@@ -57,6 +58,11 @@ volumetric_fog_density = 0.08
 volumetric_fog_albedo = Color(0.7411765, 1, 1, 1)
 
 [node name="world" type="Node3D"]
+
+[node name="Chest" parent="." instance=ExtResource("16_jbj1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.8, -3)
+collision_layer = 15
+collision_mask = 15
 
 [node name="Player" parent="." instance=ExtResource("1_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, -0.88995725, 15)
@@ -171,5 +177,7 @@ script = ExtResource("15_jkv2x")
 offset_right = 4.0
 offset_bottom = 27.0
 
-[node name="Chest" parent="CanvasLayer" instance=ExtResource("16_jbj1t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.8, -3)
+[node name="FinalPaint" parent="." instance=ExtResource("1_muem4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, -1)
+
+[editable path="Chest"]
