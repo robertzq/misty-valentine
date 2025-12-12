@@ -8,13 +8,37 @@ extends CanvasLayer
 var color_full = Color(1, 0.2, 0.2, 1) # 鲜红
 var color_empty = Color(0.2, 0.2, 0.2, 0.5) # 暗灰半透明
 
+@onready var score_panel = $ScorePanel 
+@onready var score_label = $ScorePanel/Label
+
 func _ready():
 	if player:
 		# 连接信号
 		player.hp_changed.connect(_on_hp_changed)
-		
 		_on_hp_changed(player.current_hp)
+		
+	score_panel.visible = false
+	GameManager.score_changed.connect(_on_score_changed)
+	
+func _on_score_changed(new_score):
+	# 1. 如果它是第一次出现，让它显示出来
+	if not score_panel.visible:
+		score_panel.visible = true
+		
+		# (可选) 加个更有趣的弹窗动画：从很小"崩"的一下变大
+		score_panel.scale = Vector2.ZERO # 先设为0大小
+		# 使用 Tween 动画让它弹出来
+		var tween = create_tween()
+		tween.tween_property(score_panel, "scale", Vector2.ONE, 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
+	# 2. 更新文字内容
+	# 拼凑出 "1 / 9" 这样的格式
+	score_label.text = str(new_score) + " / " + str(GameManager.TARGET_SCORE)
+	
+	# 3. (可选) 给文字加个跳动效果，增加获得感
+	var text_tween = create_tween()
+	score_label.scale = Vector2(1.5, 1.5) # 文字瞬间变大
+	text_tween.tween_property(score_label, "scale", Vector2.ONE, 0.1) # 缩回原大小
 	
 
 # 核心：更新血条显示

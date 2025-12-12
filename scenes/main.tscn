@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://do30dlank3a34"]
+[gd_scene load_steps=30 format=3 uid="uid://do30dlank3a34"]
 
 [ext_resource type="PackedScene" uid="uid://cj8yh738gwqtx" path="res://scenes/FinalPainting.tscn" id="1_muem4"]
 [ext_resource type="PackedScene" uid="uid://5k1h5ukokfjl" path="res://scenes/player.tscn" id="1_sugp2"]
@@ -58,6 +58,21 @@ volumetric_fog_density = 0.08
 volumetric_fog_albedo = Color(0.7411765, 1, 1, 1)
 
 [sub_resource type="Theme" id="Theme_jbj1t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_muem4"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.4347582, 0.2234602, 0.03311006, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_dp3eg"]
+font_size = 56
+font_color = Color(0.8948203, 0.7191844, 0.17929944, 1)
 
 [node name="world" type="Node3D"]
 
@@ -208,5 +223,21 @@ color = Color(1, 0, 0, 1)
 custom_minimum_size = Vector2(50, 10)
 layout_mode = 2
 color = Color(1, 0, 0, 1)
+
+[node name="ScorePanel" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_muem4")
+
+[node name="Label" type="Label" parent="CanvasLayer/ScorePanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "0/9"
+label_settings = SubResource("LabelSettings_dp3eg")
 
 [editable path="Chest"]

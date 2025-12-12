@@ -124,6 +124,7 @@ func start_performance():
 	
 	await assemble_tween.finished
 	
+	await get_tree().create_timer(1.0).timeout
 	# --- 🌟 第4步：融合瞬间 ---
 	parts_container.visible = false
 	full_painting.visible = true

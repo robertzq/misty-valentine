@@ -6,7 +6,7 @@ signal all_collected # 集齐9个的信号
 signal signal_chest_unlocked #开宝箱信号
 
 var current_score = 0
-const TARGET_SCORE = 1#9
+const TARGET_SCORE = 9
 
 func add_score():
 	current_score += 1
