@@ -75,8 +75,8 @@ func attack_player():
 	print("幽灵发动攻击！")
 	
 	# 1. 播放攻击动画 (如果有的话，KayKit通常叫 Attack(1h) 或 Attack)
-	if anim_player and anim_player.has_animation("Attack(1h)"):
-		anim_player.play("Attack(1h)")
+	if anim_player and anim_player.has_animation("Block_Attack"):
+		anim_player.play("Block_Attack")
 	
 	# 2. 扣主角的血
 	if player.has_method("take_damage"):
@@ -87,7 +87,7 @@ func update_animation():
 	if not anim_player: return
 	
 	# 如果正在播放攻击动画，就别切成走路了，等它播完
-	if anim_player.current_animation == "Attack(1h)":
+	if anim_player.current_animation == "Block_Attack":
 		return
 
 	if velocity.length() > 0.1:

@@ -33,7 +33,7 @@ func _on_body_entered(body):
 func collect():
 	print("✨ 捡到了碎片！")
 	
-	# 调用管家加分 (这一步我们马上做)
+	# 调用管家加分
 	if GameManager:
 		GameManager.add_score()
 	
