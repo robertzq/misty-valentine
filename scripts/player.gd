@@ -16,7 +16,7 @@ var is_attacking = false
 
 var max_hp = 5 
 var current_hp = 3
-var is_invincible = false # 无敌时间
+@export var is_invincible = false # 无敌时间
 
 signal hp_changed(val) # 新增信号，通知UI
 

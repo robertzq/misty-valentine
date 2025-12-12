@@ -76,7 +76,7 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.93, -0.65, 1)
 texture = ExtResource("10_6ytmt")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
+layer = 20
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
 anchors_preset = 15

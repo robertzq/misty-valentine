@@ -7,7 +7,7 @@ extends Node3D
 
 # 记录碎片归位的数据
 var original_transforms = []
-# 记录画框最终停留的位置（编辑器里摆放的位置）
+# 记录画框最终停留的位置
 var final_position: Vector3
 
 func _ready():
@@ -17,24 +17,22 @@ func _ready():
 		letter_ui.modulate.a = 0
 	full_painting.visible = false
 	
-	# 1. 记录“最终位置”（就是你在场景里把画放在宝箱上的那个位置）
+	# 1. 记录“最终位置”
 	final_position = global_position
 	
-	# 2. 初始时把画框瞬移到天上 (比如高 20 米)，藏起来
+	# 2. 初始时把画框瞬移到天上 (比如高 20 米)
 	global_position.y += 20.0 
 	
 	# 3. 记录碎片拼好时的相对位置
 	save_original_transforms()
 	
-	# 4. 把碎片先隐藏，或者打散在半空
-	# (这里我们先藏起来，等画框落地了再把它们变出来做飞入效果)
+	# 4. 把碎片先隐藏
 	parts_container.visible = false 
 
 	# 5. 监听信号
 	if GameManager:
 		GameManager.all_collected.connect(start_performance)
 
-# 保存碎片的正确位置（本地坐标）
 func save_original_transforms():
 	for part in parts_container.get_children():
 		original_transforms.append({
@@ -43,67 +41,90 @@ func save_original_transforms():
 			"node": part
 		})
 
-# 开始演出
 func start_performance():
 	print("🎬 电影级终局演出开始！")
 	
-	# --- 🎥 第1步：接管摄像机 (Cinematic Camera) ---
+	# --- 🛡️ 第0步：让主角无敌 ---
+	var player = get_tree().current_scene.find_child("Player", true, false)
+	if player:
+		player.is_invincible = true 
+		player.velocity = Vector3.ZERO 
+		# 可选：把主角隐藏，或者移到画框后面，防止他挡住镜头
+		# player.visible = false 
+
+	# --- 🌤️ 第0.5步：云开雾散 ---
+	var world_env = get_tree().current_scene.find_child("WorldEnvironment", true, false)
+	if world_env and world_env.environment:
+		var fog_tween = create_tween()
+		fog_tween.tween_property(world_env.environment, "volumetric_fog_density", 0.0, 6.0).set_trans(Tween.TRANS_SINE)
+		fog_tween.parallel().tween_property(world_env.environment, "background_energy_multiplier", 1.2, 6.0)
+
+	# --- 🎥 第1步：接管摄像机 (修正版) ---
 	var camera = get_viewport().get_camera_3d()
 	if camera:
-		# 1. 停止摄像机跟随主角 (假设你的相机脚本有这个属性)
-		# 如果没有 target_character 属性，可以用 set_physics_process(false) 暴力停止它
+		# 停止跟随
 		if "target_character" in camera:
 			camera.target_character = null 
 		else:
-			camera.set_physics_process(false) # 暂停相机脚本
+			camera.set_physics_process(false)
 			camera.set_process(false)
 		
-		# 2. 运镜：摄像机飞到画框正前方，稍微俯视一点
+		# --- 📐 核心修正：计算正对画框的完美机位 ---
 		var cam_tween = create_tween().set_parallel(true)
-		# 目标位置：画框最终位置的前方 6米，高 3米 (根据你的场景大小微调)
-		# 0 3 6 ，3 height 6 远近
-		var cam_target_pos = final_position + Vector3(0, 1, 4) 
 		
-		# 平滑移动相机
+		# 1. 寻找画框的"正前方"：利用 basis.z (蓝色轴)
+		# 如果你的模型是反的，可能需要改成 -global_basis.z，可以先试这个
+		var forward_direction = global_basis.z.normalized() 
+		
+		# 2. 设定高度 (Y)：想要"更低、更正"，就把高度设为和画框中心一致
+		# 假设画框在宝箱上，中心大概在地面上 1.0 到 1.2 米处
+		var target_height = 1.3 
+		
+		# 3. 设定距离：离画框 3.5 米
+		var target_distance = 8
+		
+		# 4. 组合最终坐标：落地位置 + 前方距离 + 高度偏移
+		# final_position 是地面的点 (Y=0)，所以我们要加 Vector3(0, target_height, 0)
+		var cam_target_pos = final_position + (forward_direction * target_distance) + Vector3(0, target_height, 0)
+		
+		# 5. 计算这一刻摄像机应该看向哪里 (画框中心)
+		var look_target = final_position + Vector3(2, target_height, 0)
+
+		# 6. 执行动画
 		cam_tween.tween_property(camera, "global_position", cam_target_pos, 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-		# 让相机看着画框中心 (final_position)
-		# look_at 需要每帧更新，Tween 很难直接做 look_at 动画，这里我们用一个小技巧：
-		# 直接让相机看过去，或者你可以写一个简单的 _process 来一直 look_at
-		camera.look_at(final_position + Vector3(0, 1, 0)) # 简单处理：直接看过去
+		
+		# 7. 平滑旋转摄像机 (为了防止 look_at 瞬间跳变，我们用 Tween 来转头)
+		# 这是一个小技巧：先计算出"看着目标"时的理想旋转角度
+		var temp_transform = camera.global_transform.looking_at(look_target, Vector3.UP)
+		cam_tween.tween_property(camera, "global_rotation", temp_transform.basis.get_euler(), 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	
 	# --- 🖼️ 第2步：画框神圣降临 ---
 	var drop_tween = create_tween()
-	# 5秒钟缓慢降落 (神圣感)
 	drop_tween.tween_property(self, "global_position", final_position, 5.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	
-	# 等待画框降落到位
 	await drop_tween.finished
 	print("画框就位，碎片准备汇聚...")
 	
-	# --- ✨ 第3步：碎片半空汇聚 (汇聚特效) ---
+	# --- ✨ 第3步：碎片半空汇聚 ---
 	parts_container.visible = true
 	
-	# 先把碎片随机散布在画框周围的“球形区域”里 (模拟从四面八方飞来)
+	# 先打散
 	for part in parts_container.get_children():
-		# 在半径 5-8 米的球体内随机分布
 		var random_dir = Vector3(randf()-0.5, randf()-0.5, randf()-0.5).normalized()
 		part.position = random_dir * randf_range(5.0, 8.0)
-		part.rotation = Vector3(randf()*PI, randf()*PI, randf()*PI) # 乱转
+		part.rotation = Vector3(randf()*PI, randf()*PI, randf()*PI)
 		part.visible = true
 
-	# 开始飞回动画
+	# 飞回
 	var assemble_tween = create_tween().set_parallel(true)
 	for data in original_transforms:
 		var part = data["node"]
-		# 2.5秒内飞回原位，使用 BACK (回弹) 效果，增加一点冲击力
 		assemble_tween.tween_property(part, "position", data["pos"], 2.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 		assemble_tween.tween_property(part, "rotation", data["rot"], 2.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	
-	# 等待拼合完成
 	await assemble_tween.finished
 	
-	# --- 🌟 第4步：闪光融合 ---
-	# (这里如果你有简单的闪光粒子特效，可以 play 一下)
+	# --- 🌟 第4步：融合瞬间 ---
 	parts_container.visible = false
 	full_painting.visible = true
 	
