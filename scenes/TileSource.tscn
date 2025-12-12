@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://ba8gexjjul835"]
+[gd_scene load_steps=41 format=3 uid="uid://ba8gexjjul835"]
 
 [ext_resource type="PackedScene" uid="uid://fl00fl4yaqql" path="res://assets/environment/kaykit_dungeon_remastered/Assets/gltf/wall.gltf.glb" id="1_a2vhi"]
 [ext_resource type="PackedScene" uid="uid://mv3owhxfpvso" path="res://assets/environment/kaykit_dungeon_remastered/Assets/gltf/wall_arched.gltf.glb" id="2_5plyc"]
@@ -20,18 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://le2um6a438cu" path="res://assets/environment/kaykit_halloween_bits/Assets/gltf/path_B.gltf" id="18_lyqx8"]
 [ext_resource type="PackedScene" uid="uid://c1yno7bjv5a04" path="res://assets/environment/kaykit_medieval_hexagon_pack/Assets/gltf/tiles/rivers/hex_river_J.gltf" id="20_qy5f4"]
 [ext_resource type="PackedScene" uid="uid://ydh1mt1bpevl" path="res://assets/environment/kaykit_medieval_hexagon_pack/Assets/gltf/tiles/rivers/hex_river_D.gltf" id="21_2aubk"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_i07ll"]
-size = Vector3(2, 0.5, 2)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_i07ll"]
-size = Vector3(2, 0.5, 2)
-
-[sub_resource type="BoxMesh" id="BoxMesh_gs6mm"]
-size = Vector3(2, 2.5, 2)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_bcfpx"]
-size = Vector3(2, 2.5, 2)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_b5qlb"]
 points = PackedVector3Array(-1.9119662, 0.08851713, -0.5, 1.852487, 3.8517492, 0.5, 1.852487, 0.14825074, 0.5, 1.9122399, 3.9114828, -0.5, -1.8522133, 3.8517492, 0.5, -1.9119662, 3.9114828, -0.5, 1.9122399, 0.08851713, -0.5, -1.8522133, 0.14825074, 0.5)
@@ -94,24 +82,6 @@ points = PackedVector3Array(-0.061891258, -0.9946753, -1.118964, 0.99631506, -0.
 points = PackedVector3Array(-0.94448936, -0.011152088, -0.5645446, 0.99623466, -0.046234682, 0.5645884, 0.9554578, -0.013803806, 0.56129426, -0.9706875, -0.9946031, 0.59422505, 0.043261178, -0.99938905, -1.1297382, 0.99756044, -1, 0.5653459, 0.08138165, 0.008071303, 1.1362852, 0.99623466, -0.046234682, -0.5645884, 0.08138165, 0.008071303, -1.1362852, -0.9706875, -0.9946031, -0.59422505, -0.9706875, -0.050630283, 0.59422505, -0.061918713, -0.99466836, 1.1189481, 0.99756044, -1, -0.5653459, -0.061918713, -0.050569687, -1.1189481, 0.043261178, -0.99938905, 1.1297382, -0.9706875, -0.050630283, -0.59422505, -0.061918713, -0.050569687, 1.1189481, -0.94448906, -0.011152241, 0.56454444, -0.061918713, -0.99466836, -1.1189481, 0.11795158, -0.028600186, -1.1362852, 0.11795158, -0.028600186, 1.1362852, 0.95544356, -0.0138112, -0.5612858, 0.9609523, -0.9993028, 0.5999305, 0.9609018, -0.9992767, -0.59989876, 0.95850587, -0.0474444, 0.59839034, 0.9584735, -0.047459986, -0.59836996)
 
 [node name="TileSetSource" type="Node3D"]
-
-[node name="floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5317454, 0.2253704, 0)
-mesh = SubResource("BoxMesh_i07ll")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="floor"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
-shape = SubResource("BoxShape3D_i07ll")
-
-[node name="wall" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1891139, 0)
-mesh = SubResource("BoxMesh_gs6mm")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="wall"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="wall/StaticBody3D"]
-shape = SubResource("BoxShape3D_bcfpx")
 
 [node name="wall_gltf" parent="." instance=ExtResource("1_a2vhi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1235933, -0.88288796, -0.7189815)
