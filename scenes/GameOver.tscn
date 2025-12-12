@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://yhk3wydaw6ia"]
+
+[ext_resource type="Script" uid="uid://bib03ej1v77pi" path="res://scripts/game_over.gd" id="1_6bcno"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tvctj"]
+font_size = 48
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_6bcno")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "不要急，我们慢慢来"
+label_settings = SubResource("LabelSettings_tvctj")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -17,9 +17,12 @@ var max_hp = 5 # 只有3滴血，硬核一点
 var current_hp = 3
 var is_invincible = false # 无敌时间（防止一秒钟被咬死）
 
+signal hp_changed(val) # 新增信号，通知UI
+
 # --- 1. 这里是你漏掉的关键部分：初始化 ---
 func _ready():
 	current_hp = max_hp
+	hp_changed.emit(current_hp) # 初始化时更新UI
 	print("我的动画列表: ", anim_player.get_animation_list())
 	
 	# --- 🛡️ 关键保护代码：让这个主角的材质独立出来 ---
@@ -138,7 +141,9 @@ func get_nearest_enemy():
 
 # --- ❤️ 受伤函数 ---
 func take_damage(amount):
-	if is_invincible: return 
+	if is_invincible: return
+	current_hp -= amount
+	hp_changed.emit(current_hp) # 通知UI更新 
 	
 	current_hp -= amount
 	print("😱 乌拉受伤了！剩余血量: ", current_hp)
@@ -164,4 +169,16 @@ func take_damage(amount):
 
 func die():
 	print("💀 游戏结束！")
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
+	
+
+# --- ✨ 新增：回血函数 ---
+func heal(amount):
+	if current_hp >= max_hp: return
+	
+	current_hp += amount
+	if current_hp > max_hp:
+		current_hp = max_hp
+	
+	hp_changed.emit(current_hp) # 通知UI更新
+	print("💖 看到照片感到温暖，血量恢复：", current_hp)
