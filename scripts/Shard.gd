@@ -2,9 +2,11 @@ extends Area3D
 
 # 允许在编辑器里为每个碎片单独拖图片
 @export var texture: Texture2D
-
+@export var shard_name: String = "一个碎片" 
+@export var shard_icon: Texture2D # 如果你想弹窗里显示不同的图标
 # 获取你的模型 (用来换图)
 @onready var mesh = $MeshInstance3D
+@onready var fog_volume_node = $FogVolume # 假设碎片子节点有个FogVolume用来制造迷雾
 
 func _ready():
 	# 1. 自动连接碰撞信号
@@ -32,10 +34,16 @@ func _on_body_entered(body):
 
 func collect():
 	print("✨ 捡到了碎片！")
-	
+	# 如果是简单的做法：直接让制造雾气的节点消失，或者播放一个粒子特效驱散雾气
+	if fog_volume_node:
+		# 比如做一个淡出的动画然后删除
+		var tween = create_tween()
+		tween.tween_property(fog_volume_node, "density", 0.0, 1.0)
+		tween.tween_callback(fog_volume_node.queue_free)
 	# 调用管家加分
 	if GameManager:
 		GameManager.add_score()
+		GameManager.shard_collected_with_info.emit(shard_name)
 	
 	# 销毁自己
 	queue_free()

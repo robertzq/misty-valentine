@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://do30dlank3a34"]
+[gd_scene load_steps=31 format=3 uid="uid://do30dlank3a34"]
 
 [ext_resource type="PackedScene" uid="uid://cj8yh738gwqtx" path="res://scenes/FinalPainting.tscn" id="1_muem4"]
 [ext_resource type="PackedScene" uid="uid://5k1h5ukokfjl" path="res://scenes/player.tscn" id="1_sugp2"]
@@ -43,6 +43,9 @@ size = Vector3(60, 0.5, 60)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h2yge"]
 size = Vector3(60, 0.4, 60)
+
+[sub_resource type="FogMaterial" id="FogMaterial_muem4"]
+density = -10.0
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
 
@@ -122,37 +125,81 @@ shape = SubResource("BoxShape3D_h2yge")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.70000005, 23)
 texture = ExtResource("5_trceg")
 
+[node name="FogVolume" type="FogVolume" parent="NavigationRegion3D/StaticBody3D/Shard1"]
+shape = 0
+material = SubResource("FogMaterial_muem4")
+
 [node name="Shard2" parent="NavigationRegion3D/StaticBody3D" groups=["Shard"] instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.70000005, 16)
 texture = ExtResource("6_a8y0u")
+shard_name = "又一个碎片"
+
+[node name="FogVolume" type="FogVolume" parent="NavigationRegion3D/StaticBody3D/Shard2"]
+shape = 0
+material = SubResource("FogMaterial_muem4")
 
 [node name="Shard3" parent="NavigationRegion3D/StaticBody3D" groups=["Shard"] instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0.7999997, 23)
 texture = ExtResource("7_jkv2x")
+shard_name = "猫猫碎片"
+
+[node name="FogVolume" type="FogVolume" parent="NavigationRegion3D/StaticBody3D/Shard3"]
+shape = 0
+material = SubResource("FogMaterial_muem4")
 
 [node name="Shard4" parent="NavigationRegion3D/StaticBody3D" groups=["Shard"] instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0.70000005, -18)
 texture = ExtResource("8_jbj1t")
+shard_name = "up主之碎片"
+
+[node name="FogVolume" type="FogVolume" parent="NavigationRegion3D/StaticBody3D/Shard4"]
+shape = 0
+material = SubResource("FogMaterial_muem4")
 
 [node name="Shard5" parent="NavigationRegion3D/StaticBody3D" groups=["Shard"] instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0.70000005, -25)
 texture = ExtResource("9_muem4")
+shard_name = "是个碎片"
+
+[node name="FogVolume" type="FogVolume" parent="NavigationRegion3D/StaticBody3D/Shard5"]
+shape = 0
+material = SubResource("FogMaterial_muem4")
 
 [node name="Shard6" parent="NavigationRegion3D/StaticBody3D" groups=["Shard"] instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0.70000005, -18)
 texture = ExtResource("10_dp3eg")
+shard_name = "啊～碎片"
+
+[node name="FogVolume" type="FogVolume" parent="NavigationRegion3D/StaticBody3D/Shard6"]
+shape = 0
+material = SubResource("FogMaterial_muem4")
 
 [node name="Shard7" parent="NavigationRegion3D/StaticBody3D" groups=["Shard"] instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0.70000005, -18)
 texture = ExtResource("11_0ld40")
+shard_name = "爪爪碎片"
+
+[node name="FogVolume" type="FogVolume" parent="NavigationRegion3D/StaticBody3D/Shard7"]
+shape = 0
+material = SubResource("FogMaterial_muem4")
 
 [node name="Shard8" parent="NavigationRegion3D/StaticBody3D" groups=["Shard"] instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 0.70000005, -6)
 texture = ExtResource("12_gqmmt")
+shard_name = "好的碎片"
+
+[node name="FogVolume" type="FogVolume" parent="NavigationRegion3D/StaticBody3D/Shard8"]
+shape = 0
+material = SubResource("FogMaterial_muem4")
 
 [node name="Shard9" parent="NavigationRegion3D/StaticBody3D" groups=["Shard"] instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0.70000005, 13)
 texture = ExtResource("13_yc10j")
+shard_name = "wula碎片"
+
+[node name="FogVolume" type="FogVolume" parent="NavigationRegion3D/StaticBody3D/Shard9"]
+shape = 0
+material = SubResource("FogMaterial_muem4")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lquwl")

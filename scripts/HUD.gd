@@ -19,6 +19,7 @@ func _ready():
 		
 	score_panel.visible = false
 	GameManager.score_changed.connect(_on_score_changed)
+	GameManager.shard_collected_with_info.connect(_on_shard_collected_info)
 	
 func _on_score_changed(new_score):
 	# 1. 如果它是第一次出现，让它显示出来
@@ -55,3 +56,19 @@ func _on_hp_changed(current_hp):
 		else:
 			# 索引大于等于当前血量，显示为没血（背景色）
 			icon.color = color_empty
+func _on_shard_collected_info(shard_name):
+	# 让奖杯面板弹出来
+	score_panel.visible = true
+	
+	# 更新文字：不仅显示进度，还显示刚才获得了什么
+	var current = GameManager.current_score
+	var target = GameManager.TARGET_SCORE
+	
+	# 比如显示： "获得：快乐之碎片\n进度: 3 / 9"
+	score_label.text = "获得: " + shard_name + ": " + str(current) + " / " + str(target)
+	
+	# 播放弹弹动画 (Boing effect)
+	score_panel.pivot_offset = score_panel.size / 2 # 确保从中心缩放
+	var tween = create_tween()
+	tween.tween_property(score_panel, "scale", Vector2(1.2, 1.2), 0.1)
+	tween.tween_property(score_panel, "scale", Vector2(1.0, 1.0), 0.2).set_trans(Tween.TRANS_BOUNCE)

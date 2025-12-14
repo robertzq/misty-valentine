@@ -5,18 +5,36 @@ extends Node3D
 @onready var full_painting = $FullPaintingSprite 
 @onready var letter_ui = $CanvasLayer/Panel 
 
+@onready var back_content = $BackContent
+@onready var card_mesh = $BackContent/PaintingMesh  # 你的贺卡 MeshInstance3D
+@onready var message_label = $BackContent/Label3D # 你的 Label3D
+
 # 记录碎片归位的数据
 var original_transforms = []
 # 记录画框最终停留的位置
 var final_position: Vector3
 
+var final_message = """To 鱿鱼小姐:
+
+感谢你的一直陪伴。
+幸好遇到你。
+
+                                —— 赵先生"""
 func _ready():
 	# 0. 初始设置：隐藏 UI 和完整画作
 	if letter_ui:
 		letter_ui.visible = false
 		letter_ui.modulate.a = 0
 	full_painting.visible = false
-	
+	# --- 新增初始化 ---
+	# 确保背面内容初始状态正确
+	if back_content:
+		back_content.visible = true # 整个背面节点是可见的，但在背面我们暂时看不到
+	if card_mesh:
+		card_mesh.visible = true    # 初始显示贺卡
+	if message_label:
+		message_label.visible = false # 初始隐藏文字
+		message_label.text = final_message
 	# 1. 记录“最终位置”
 	final_position = global_position
 	
@@ -78,7 +96,7 @@ func start_performance():
 		
 		# 2. 设定高度 (Y)：想要"更低、更正"，就把高度设为和画框中心一致
 		# 假设画框在宝箱上，中心大概在地面上 1.0 到 1.2 米处
-		var target_height = 1.3 
+		var target_height = 2
 		
 		# 3. 设定距离：离画框 3.5 米
 		var target_distance = 8
@@ -129,9 +147,35 @@ func start_performance():
 	parts_container.visible = false
 	full_painting.visible = true
 	
+	await get_tree().create_timer(1.0).timeout
+	play_flip_and_show_message()
 	# --- 📜 第5步：信件浮现 ---
-	await get_tree().create_timer(5.0).timeout
-	if letter_ui:
-		letter_ui.visible = true
-		var ui_tween = create_tween()
-		ui_tween.tween_property(letter_ui, "modulate:a", 1.0, 2.0)
+	#await get_tree().create_timer(5.0).timeout
+	#if letter_ui:
+	#	letter_ui.visible = true
+	#	var ui_tween = create_tween()
+	#	ui_tween.tween_property(letter_ui, "modulate:a", 1.0, 2.0)
+
+# --- 新增动画函数 ---
+func play_flip_and_show_message():
+	var tween = create_tween()
+	
+	# 1. 旋转画框 180度 (假设绕 Y 轴旋转)
+	# set_trans(Tween.TRANS_SINE) 让旋转更平滑
+	tween.tween_property(self, "rotation_degrees:y", 180.0, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	# 2. 旋转完成后，等待 1 秒 (此时看到的是贺卡)
+	tween.tween_interval(1.0)
+	
+	# 3. 隐藏贺卡，显示文字
+	tween.tween_callback(func():
+		if card_mesh:
+			card_mesh.visible = false
+		if message_label:
+			message_label.visible = true
+			# 可选：如果你想让文字有个淡入效果，可以使用透明度动画
+			message_label.modulate.a = 0.0
+			var text_tween = create_tween()
+			text_tween.tween_property(message_label, "modulate:a", 1.0, 0.5)
+	)
+	

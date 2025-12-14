@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cj8yh738gwqtx"]
+[gd_scene load_steps=19 format=3 uid="uid://cj8yh738gwqtx"]
 
 [ext_resource type="Script" uid="uid://doitv7orrj7fc" path="res://scripts/FinalPainting.gd" id="1_fxelm"]
 [ext_resource type="Texture2D" uid="uid://cxas37r11fu0p" path="res://textures/UlaPic.jpg" id="1_karfh"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c2ksacjfnl73v" path="res://textures/painting_parts/part_7.png" id="8_4j0uy"]
 [ext_resource type="Texture2D" uid="uid://dx310jfly4spd" path="res://textures/painting_parts/part_8.png" id="9_x3hbn"]
 [ext_resource type="Texture2D" uid="uid://cq5ghojmhtpbh" path="res://textures/painting_parts/part_9.png" id="10_6ytmt"]
+[ext_resource type="Texture2D" uid="uid://drn17sw3np1hj" path="res://assets/100days.jpg" id="12_7qksr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4l6d5"]
 
@@ -24,6 +25,12 @@ roughness = 0.8
 
 [sub_resource type="LabelSettings" id="LabelSettings_fxelm"]
 font_size = 48
+
+[sub_resource type="QuadMesh" id="QuadMesh_r865r"]
+size = Vector2(3, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ohabs"]
+albedo_texture = ExtResource("12_7qksr")
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_fxelm")
@@ -106,3 +113,15 @@ offset_right = 838.0
 offset_bottom = 548.0
 bbcode_enabled = true
 text = "[font_size=40]Hello test：[/font_size]"
+
+[node name="BackContent" type="Node3D" parent="."]
+
+[node name="Label3D" type="Label3D" parent="BackContent"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.2)
+text = "1111"
+
+[node name="PaintingMesh" type="MeshInstance3D" parent="BackContent"]
+transform = Transform3D(-0.95, 0, -8.305164e-08, 0, 0.95, 0, 8.305164e-08, 0, -0.95, 0, 0, -0.1)
+visible = false
+mesh = SubResource("QuadMesh_r865r")
+surface_material_override/0 = SubResource("StandardMaterial3D_ohabs")
