@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c2ksacjfnl73v" path="res://textures/painting_parts/part_7.png" id="8_4j0uy"]
 [ext_resource type="Texture2D" uid="uid://dx310jfly4spd" path="res://textures/painting_parts/part_8.png" id="9_x3hbn"]
 [ext_resource type="Texture2D" uid="uid://cq5ghojmhtpbh" path="res://textures/painting_parts/part_9.png" id="10_6ytmt"]
-[ext_resource type="Texture2D" uid="uid://drn17sw3np1hj" path="res://assets/100days.jpg" id="12_7qksr"]
+[ext_resource type="Texture2D" uid="uid://6yg4effx71y0" path="res://assets/100days.png" id="12_7qksr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4l6d5"]
 
@@ -84,6 +84,7 @@ texture = ExtResource("10_6ytmt")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 20
+visible = false
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
 anchors_preset = 15
@@ -117,10 +118,12 @@ text = "[font_size=40]Hello test：[/font_size]"
 [node name="BackContent" type="Node3D" parent="."]
 
 [node name="Label3D" type="Label3D" parent="BackContent"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.2)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.4, 0, -0.2)
 text = "1111"
+horizontal_alignment = 0
 
 [node name="PaintingMesh" type="MeshInstance3D" parent="BackContent"]
 transform = Transform3D(-0.95, 0, -8.305164e-08, 0, 0.95, 0, 8.305164e-08, 0, -0.95, 0, 0, -0.1)
+visible = false
 mesh = SubResource("QuadMesh_r865r")
 surface_material_override/0 = SubResource("StandardMaterial3D_ohabs")
