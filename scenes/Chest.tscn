@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8yvvagv5apex"]
+
+[ext_resource type="Script" uid="uid://c41sahuh0qrmg" path="res://scripts/Chest.gd" id="1_s2tek"]
+[ext_resource type="PackedScene" uid="uid://c4l7qda5dnq3y" path="res://assets/environment/kaykit_dungeon_remastered/Assets/gltf/chest_gold.glb" id="2_rkgax"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s2tek"]
+radius = 0.9
+height = 1.8
+
+[node name="Area3D" type="Area3D"]
+script = ExtResource("1_s2tek")
+
+[node name="chest_gold2" parent="." instance=ExtResource("2_rkgax")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.80089e-05, 0, 0.49158502)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0.6, 0.5)
+shape = SubResource("CapsuleShape3D_s2tek")

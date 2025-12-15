@@ -1,0 +1,129 @@
+[gd_scene load_steps=19 format=3 uid="uid://cj8yh738gwqtx"]
+
+[ext_resource type="Script" uid="uid://doitv7orrj7fc" path="res://scripts/FinalPainting.gd" id="1_fxelm"]
+[ext_resource type="Texture2D" uid="uid://cxas37r11fu0p" path="res://textures/UlaPic.jpg" id="1_karfh"]
+[ext_resource type="Texture2D" uid="uid://daqgxrly0gi43" path="res://textures/painting_parts/part_1.png" id="2_6hgo7"]
+[ext_resource type="Texture2D" uid="uid://mivfytqvs4ce" path="res://textures/painting_parts/part_2.png" id="3_fxelm"]
+[ext_resource type="Texture2D" uid="uid://byaklkluv0cuj" path="res://textures/painting_parts/part_3.png" id="4_7qksr"]
+[ext_resource type="Texture2D" uid="uid://cjy7dk40yedmj" path="res://textures/painting_parts/part_4.png" id="5_r865r"]
+[ext_resource type="Texture2D" uid="uid://ee2y7kx0i43p" path="res://textures/painting_parts/part_5.png" id="6_ohabs"]
+[ext_resource type="Texture2D" uid="uid://daah1vliaga76" path="res://textures/painting_parts/part_6.png" id="7_u8vk1"]
+[ext_resource type="Texture2D" uid="uid://c2ksacjfnl73v" path="res://textures/painting_parts/part_7.png" id="8_4j0uy"]
+[ext_resource type="Texture2D" uid="uid://dx310jfly4spd" path="res://textures/painting_parts/part_8.png" id="9_x3hbn"]
+[ext_resource type="Texture2D" uid="uid://cq5ghojmhtpbh" path="res://textures/painting_parts/part_9.png" id="10_6ytmt"]
+[ext_resource type="Texture2D" uid="uid://6yg4effx71y0" path="res://assets/100days.png" id="12_7qksr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4l6d5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qnu2q"]
+material = SubResource("StandardMaterial3D_4l6d5")
+size = Vector3(3, 2, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_karfh"]
+albedo_color = Color(0.36078432, 0.2509804, 0.2, 1)
+roughness = 0.8
+
+[sub_resource type="LabelSettings" id="LabelSettings_fxelm"]
+font_size = 48
+
+[sub_resource type="QuadMesh" id="QuadMesh_r865r"]
+size = Vector2(3, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ohabs"]
+albedo_texture = ExtResource("12_7qksr")
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_fxelm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_qnu2q")
+surface_material_override/0 = SubResource("StandardMaterial3D_karfh")
+
+[node name="FullPaintingSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0.1)
+visible = false
+texture = ExtResource("1_karfh")
+
+[node name="Parts" type="Node3D" parent="."]
+
+[node name="Sprite3D1" type="Sprite3D" parent="Parts"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.93, 0.65, 1)
+texture = ExtResource("2_6hgo7")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Parts"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.65, 1)
+texture = ExtResource("3_fxelm")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Parts"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.93, 0.65, 1)
+texture = ExtResource("4_7qksr")
+
+[node name="Sprite3D4" type="Sprite3D" parent="Parts"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.93, 0, 1)
+texture = ExtResource("5_r865r")
+
+[node name="Sprite3D5" type="Sprite3D" parent="Parts"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 1)
+texture = ExtResource("6_ohabs")
+
+[node name="Sprite3D6" type="Sprite3D" parent="Parts"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.93, 0, 1)
+texture = ExtResource("7_u8vk1")
+
+[node name="Sprite3D7" type="Sprite3D" parent="Parts"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.93, -0.65, 1)
+texture = ExtResource("8_4j0uy")
+
+[node name="Sprite3D8" type="Sprite3D" parent="Parts"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.65, 1)
+texture = ExtResource("9_x3hbn")
+
+[node name="Sprite3D9" type="Sprite3D" parent="Parts"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.93, -0.65, 1)
+texture = ExtResource("10_6ytmt")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 20
+visible = false
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 234.0
+offset_top = -11.0
+offset_right = 780.0
+offset_bottom = 251.0
+text = "For Ula"
+label_settings = SubResource("LabelSettings_fxelm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 261.0
+offset_top = 290.0
+offset_right = 838.0
+offset_bottom = 548.0
+bbcode_enabled = true
+text = "[font_size=40]Hello test：[/font_size]"
+
+[node name="BackContent" type="Node3D" parent="."]
+
+[node name="Label3D" type="Label3D" parent="BackContent"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.4, 0, -0.2)
+text = "1111"
+horizontal_alignment = 0
+
+[node name="PaintingMesh" type="MeshInstance3D" parent="BackContent"]
+transform = Transform3D(-0.95, 0, -8.305164e-08, 0, 0.95, 0, 8.305164e-08, 0, -0.95, 0, 0, -0.1)
+visible = false
+mesh = SubResource("QuadMesh_r865r")
+surface_material_override/0 = SubResource("StandardMaterial3D_ohabs")

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://84whu0qfj153"]
+
+[ext_resource type="Script" uid="uid://cvcco4htmp87j" path="res://scripts/PhotoSpot.gd" id="1_wtwem"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_77yjg"]
+
+[node name="Area3D" type="Area3D"]
+script = ExtResource("1_wtwem")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_77yjg")

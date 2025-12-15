@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://daah1vliaga76"
-path.s3tc="res://.godot/imported/part_6.png-2b670441a1cd63bc90381dbdcfcc038f.s3tc.ctex"
+uid="uid://cxas37r11fu0p"
+path.s3tc="res://.godot/imported/UlaPic.jpg-727de4c7e6532d09708c1a76b6f62d86.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/painting_parts/part_6.png"
-dest_files=["res://.godot/imported/part_6.png-2b670441a1cd63bc90381dbdcfcc038f.s3tc.ctex"]
+source_file="res://textures/UlaPic.jpg"
+dest_files=["res://.godot/imported/UlaPic.jpg-727de4c7e6532d09708c1a76b6f62d86.s3tc.ctex"]
 
 [params]
 
