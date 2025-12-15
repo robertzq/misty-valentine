@@ -9,11 +9,12 @@ var purify_effect_scene = preload("res://scenes/PurifyEffect.tscn")
 @export var detection_range = 8.0  # 警戒范围
 @export var give_up_range = 12.0   # 脱战范围
 @export var attack_range = 1.5     # ⚔️ 攻击范围 (必须很近才能打到)
-@export var attack_cooldown = 1.5  # ⚔️ 攻击冷却 (几秒咬一口)
+@export var attack_cooldown = 1.2  # ⚔️ 攻击冷却 (几秒咬一口)
 
 var player = null
 var is_chasing = false
 var time_since_last_attack = 0.0 # 计时器
+@export var ghost_blood = 2
 
 func _ready():
 	player = get_tree().get_first_node_in_group("Player")
@@ -99,7 +100,9 @@ func update_animation():
 
 # --- 受伤与死亡 ---
 func take_damage(_amount):
-	purify()
+	ghost_blood-=1
+	if(ghost_blood <= 0):
+		purify()
 
 func purify():
 	var effect = purify_effect_scene.instantiate()
