@@ -122,6 +122,5 @@ text = "1111"
 
 [node name="PaintingMesh" type="MeshInstance3D" parent="BackContent"]
 transform = Transform3D(-0.95, 0, -8.305164e-08, 0, 0.95, 0, 8.305164e-08, 0, -0.95, 0, 0, -0.1)
-visible = false
 mesh = SubResource("QuadMesh_r865r")
 surface_material_override/0 = SubResource("StandardMaterial3D_ohabs")
