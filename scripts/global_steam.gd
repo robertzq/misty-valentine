@@ -15,7 +15,7 @@ func _initialize_steam() -> void:
 	# 如果初始化失败（比如玩家没开 Steam 客户端），这里会返回非 1 的状态
 	var init_response = Steam.steamInitEx(false, APP_ID)
 	
-	if init_response['status'] > 0:
+	if init_response['status'] == 0:
 		is_on_steam = true
 		print("[Steam] 连接成功！状态: %s" % str(init_response['verbal']))
 		
