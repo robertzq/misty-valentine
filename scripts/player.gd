@@ -171,6 +171,7 @@ func take_damage(amount):
 
 func die():
 	print("💀 游戏结束！")
+	GameManager.current_score = 0
 	await get_tree().create_timer(1.0).timeout
 	# 切换到结束场景，确保你有这个场景文件
 	get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
