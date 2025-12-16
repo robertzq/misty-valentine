@@ -5,7 +5,7 @@ extends CharacterBody3D
 var purify_effect_scene = preload("res://scenes/PurifyEffect.tscn")
 
 # --- 配置参数 ---
-@export var speed = 2.0 
+@export var speed = 1.5 
 @export var detection_range = 8.0  # 警戒范围
 @export var give_up_range = 12.0   # 脱战范围
 @export var attack_range = 1.5     # ⚔️ 攻击范围 (必须很近才能打到)
