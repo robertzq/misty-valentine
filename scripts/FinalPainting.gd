@@ -178,7 +178,7 @@ func play_final_reveal_sequence():
 	tween.tween_property(self, "rotation_degrees:y", 180.0, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	
 	# 2. 停留
-	tween.chain().tween_interval(1.5)
+	tween.chain().tween_interval(3.0)
 	
 	# 3. 准备消散照片
 	tween.chain().tween_callback(func():
