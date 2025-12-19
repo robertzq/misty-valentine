@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c5emoch1trhpw" path="res://scripts/Intro.gd" id="1_45dpb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_45dpb"]
-font_size = 100
+font_size = 50
 
 [node name="IntroControl" type="Control"]
 layout_mode = 3
@@ -12,10 +12,10 @@ script = ExtResource("1_45dpb")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 189.0
-offset_top = 86.0
-offset_right = 793.0
-offset_bottom = 404.0
+offset_left = 21.0
+offset_top = 13.0
+offset_right = 605.0
+offset_bottom = 317.0
 label_settings = SubResource("LabelSettings_45dpb")
 horizontal_alignment = 1
 vertical_alignment = 1

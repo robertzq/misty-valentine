@@ -156,9 +156,19 @@ func start_performance():
 	
 	# 欣赏
 	await get_tree().create_timer(3.0).timeout
+	# --- ✅ 修正点：ID 必须和网页后台一模一样 ---
+	print("尝试触发成就：ACH_PIC_COLLECT")
 	
-	# 进入后半段
+	# 安全调用：防止因为 GlobalSteam 没加载导致游戏卡死
+	if get_tree().root.has_node("GlobalSteam"):
+		# 调用你 GlobalSteam.gd 里定义的 unlock_achievement 函数
+		get_tree().root.get_node("GlobalSteam").unlock_achievement("ACH_PIC_COLLECT")
+	else:
+		printerr("⚠️ 警告：找不到 GlobalSteam 节点！")
+	
+	# 无论成就成不成功，强制继续流程！(防止卡住)
 	play_final_reveal_sequence()
+	
 
 # --- 🎬 后半段：翻转与信件 ---
 func play_final_reveal_sequence():
@@ -168,7 +178,7 @@ func play_final_reveal_sequence():
 	tween.tween_property(self, "rotation_degrees:y", 180.0, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	
 	# 2. 停留
-	tween.chain().tween_interval(1.5)
+	tween.chain().tween_interval(3.0)
 	
 	# 3. 准备消散照片
 	tween.chain().tween_callback(func():
@@ -247,6 +257,11 @@ func update_single_line_scramble(progress: float, target_line: String):
 func finish_performance():
 	is_performance_finished = true
 	print("✅ 演出结束")
+	# --- ✅ 修正点：ID 必须和网页后台一模一样 ---
+	print("尝试触发成就：ACH_THE_MOMENT")
+	
+	if get_tree().root.has_node("GlobalSteam"):
+		get_tree().root.get_node("GlobalSteam").unlock_achievement("ACH_THE_MOMENT")
 
 # --- 翻转 ---
 func flip_card_interactive():
