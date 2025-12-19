@@ -74,7 +74,7 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_dp3eg"]
-font_size = 56
+font_size = 40
 font_color = Color(0.8948203, 0.7191844, 0.17929944, 1)
 
 [node name="world" type="Node3D"]
@@ -275,9 +275,9 @@ color = Color(1, 0, 0, 1)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
+offset_left = -53.0
+offset_right = 28.0
+offset_bottom = 75.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_muem4")
 

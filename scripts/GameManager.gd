@@ -7,7 +7,7 @@ signal signal_chest_unlocked #开宝箱信号
 signal shard_collected_with_info(name)
 
 var current_score = 0
-const TARGET_SCORE = 1
+const TARGET_SCORE = 9
 
 func add_score():
 	current_score += 1

@@ -156,7 +156,7 @@ func start_performance():
 	
 	# 欣赏
 	await get_tree().create_timer(3.0).timeout
-	
+	SteamManager.unlock_achievement("ACH_PIC_COLLECT")
 	# 进入后半段
 	play_final_reveal_sequence()
 
@@ -247,6 +247,7 @@ func update_single_line_scramble(progress: float, target_line: String):
 func finish_performance():
 	is_performance_finished = true
 	print("✅ 演出结束")
+	SteamManager.unlock_achievement("ACH_PIC_COLLECT")
 
 # --- 翻转 ---
 func flip_card_interactive():
