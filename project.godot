@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*res://scripts/GameManager.gd"
-GlobalSteam="*res://scripts/global_steam.gd"
 
 [input]
 

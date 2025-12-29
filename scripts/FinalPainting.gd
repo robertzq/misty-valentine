@@ -2,17 +2,18 @@ extends Node3D
 
 # --- 节点引用 ---
 @onready var parts_container = $Parts
-@onready var full_painting = $FullPaintingSprite 
+@onready var full_painting = $FullPaintingSprite
 @onready var back_content = $BackContent
-@onready var card_mesh = $BackContent/PaintingMesh 
-@onready var message_label = $BackContent/Label3D 
+@onready var card_mesh = $BackContent/PaintingMesh
+@onready var message_label = $BackContent/Label3D
+@onready var bgmPlayer = $"../bgmPlayer"
 
 # --- 数据记录 ---
 var original_transforms = []
 var final_position: Vector3
 var is_performance_finished = false
-var is_flipping = false 
-var current_side = "back" 
+var is_flipping = false
+var current_side = "back"
 
 # --- ✅ 核心修改1：专属乱码池 ---
 # 所有的“乱码”都会从这句话里随机抽取
@@ -24,7 +25,7 @@ const SCRAMBLE_CHARS = "乌拉With社死的RBT"
 var text_blocks = [
 	{
 		"text": "To 鱿鱼小姐:\n有时候常想\n如果能早点遇到你就好了",
-		"pause": 2.0, 
+		"pause": 2.0,
 		"speed": 5.0  # 原来3.0 -> 改成 5.0秒，慢慢浮现
 	},
 	{
@@ -36,31 +37,31 @@ var text_blocks = [
 	},
 	{
 		"text": "\n我很珍惜这一点\n                        —— 赵先生",
-		"pause": 0.0, 
+		"pause": 0.0,
 		"speed": 4.0  # 原来2.5 -> 改成 4.0秒
 	}
 ]
 
 # 用于记录已经显示出来的“清晰文本”
-var current_stable_text = "" 
+var current_stable_text = ""
 
 func _ready():
 	# 0. 初始状态设置
 	full_painting.visible = false
-	parts_container.visible = false 
+	parts_container.visible = false
 	
 	if back_content: back_content.visible = true
 	if card_mesh: card_mesh.visible = true
-	if message_label: 
+	if message_label:
 		message_label.visible = false
 		message_label.text = ""
-		message_label.modulate.a = 0 
+		message_label.modulate.a = 0
 
 	# 1. 记录位置
 	final_position = global_position
 	
 	# 2. 瞬移上天
-	global_position.y += 20.0 
+	global_position.y += 20.0
 	
 	# 3. 记录碎片位置
 	save_original_transforms()
@@ -93,17 +94,17 @@ func start_performance():
 	print("🎬 最终演出开始...")
 	
 	# 隐藏 UI
-	var hud = get_tree().current_scene.find_child("UI", true, false) 
-	if hud: hud.visible = false 
+	var hud = get_tree().current_scene.find_child("UI", true, false)
+	if hud: hud.visible = false
 	
 	# 主角控制
 	var player = get_tree().current_scene.find_child("Player", true, false)
 	if player:
 		if "is_watching_cutscene" in player:
-			player.trigger_final_cutscene() 
+			player.trigger_final_cutscene()
 		else:
-			player.velocity = Vector3.ZERO 
-			player.is_invincible = true 
+			player.velocity = Vector3.ZERO
+			player.is_invincible = true
 
 	# 📷 摄像机运镜 (完全保留)
 	var camera = get_viewport().get_camera_3d()
@@ -112,16 +113,16 @@ func start_performance():
 		
 		var cam_tween = create_tween().set_parallel(true)
 		
-		var camera_height = 1.0       
-		var painting_center_y = 1.5   
-		var distance = 3.5            
+		var camera_height = 1.0
+		var painting_center_y = 1.5
+		var distance = 3.5
 		
 		var flat_forward = global_basis.z
-		flat_forward.y = 0 
+		flat_forward.y = 0
 		flat_forward = flat_forward.normalized()
 		
 		var cam_target_pos = final_position + (flat_forward * distance)
-		cam_target_pos.y = final_position.y + camera_height 
+		cam_target_pos.y = final_position.y + camera_height
 		
 		var look_target = final_position + Vector3(0, painting_center_y, 0)
 	
@@ -130,6 +131,8 @@ func start_performance():
 		var target_transform = camera.global_transform.looking_at(look_target, Vector3.UP)
 		cam_tween.tween_property(camera, "global_rotation", target_transform.basis.get_euler(), 4.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
+	
+	play_deep_bgm()
 	# 画框降落
 	var drop_tween = create_tween()
 	drop_tween.tween_property(self, "global_position", final_position, 5.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
@@ -197,7 +200,7 @@ func play_final_reveal_sequence():
 		fade_step.tween_property(card_mesh, "scale", Vector3.ZERO, 2.0)
 	
 	# 5. 显示文字
-	tween.chain().tween_callback(func(): 
+	tween.chain().tween_callback(func():
 		card_mesh.visible = false
 		message_label.visible = true
 		message_label.modulate.a = 1.0
@@ -206,7 +209,7 @@ func play_final_reveal_sequence():
 
 # --- 📝 文字演出逻辑 ---
 func start_text_sequence():
-	current_stable_text = "" 
+	current_stable_text = ""
 	
 	for block in text_blocks:
 		var line_text = block["text"]
@@ -215,16 +218,16 @@ func start_text_sequence():
 		
 		var line_tween = create_tween()
 		line_tween.tween_method(
-			update_single_line_scramble.bind(line_text), 
-			0.0, 
-			3.0, 
+			update_single_line_scramble.bind(line_text),
+			0.0,
+			3.0,
 			duration
 		)
 		
 		await line_tween.finished
 		
 		current_stable_text += line_text
-		message_label.text = current_stable_text 
+		message_label.text = current_stable_text
 		
 		if pause_time > 0:
 			await get_tree().create_timer(pause_time).timeout
@@ -277,3 +280,24 @@ func flip_card_interactive():
 	
 	tween.tween_callback(func(): is_flipping = false)
 	
+func play_deep_bgm():
+	# 1. 确保音量是正常的 (0 dB)
+	bgmPlayer.volume_db = 0.0
+	bgmPlayer.play()
+	
+	# 2. 先播放 75 秒 (留 5 秒给淡出)
+	await get_tree().create_timer(75.0).timeout
+	
+	# 3. 创建 Tween 动画来实现淡出
+	var tween = create_tween()
+	
+	# 在 5 秒内，将 volume_db 属性从当前值变成 -80 dB (静音)
+	# TRANS_SINE 和 EASE_IN 能让淡出听起来更自然
+	tween.tween_property(bgmPlayer, "volume_db", -80.0, 5.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	
+	# 4. 等淡出动画播放完
+	await tween.finished
+	
+	# 5. 彻底停止播放
+	bgmPlayer.stop()
+	# 可以在这里触发“游戏结束”或“退出”按钮的显示
