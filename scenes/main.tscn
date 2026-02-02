@@ -125,6 +125,7 @@ shape = SubResource("BoxShape3D_h2yge")
 [node name="Shard1" parent="NavigationRegion3D/StaticBody3D" groups=["Shard"] instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.70000005, 23)
 texture = ExtResource("5_trceg")
+shard_name = "hi碎片"
 
 [node name="FogVolume" type="FogVolume" parent="NavigationRegion3D/StaticBody3D/Shard1"]
 shape = 0
@@ -133,7 +134,7 @@ material = SubResource("FogMaterial_muem4")
 [node name="Shard2" parent="NavigationRegion3D/StaticBody3D" groups=["Shard"] instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.70000005, 16)
 texture = ExtResource("6_a8y0u")
-shard_name = "又一个碎片"
+shard_name = "头发碎片"
 
 [node name="FogVolume" type="FogVolume" parent="NavigationRegion3D/StaticBody3D/Shard2"]
 shape = 0
@@ -160,7 +161,7 @@ material = SubResource("FogMaterial_muem4")
 [node name="Shard5" parent="NavigationRegion3D/StaticBody3D" groups=["Shard"] instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0.7, -20)
 texture = ExtResource("9_muem4")
-shard_name = "是个碎片"
+shard_name = "又一个碎片"
 
 [node name="FogVolume" type="FogVolume" parent="NavigationRegion3D/StaticBody3D/Shard5"]
 shape = 0
@@ -169,7 +170,7 @@ material = SubResource("FogMaterial_muem4")
 [node name="Shard6" parent="NavigationRegion3D/StaticBody3D" groups=["Shard"] instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0.70000005, -18)
 texture = ExtResource("10_dp3eg")
-shard_name = "啊～碎片"
+shard_name = "大波浪碎片"
 
 [node name="FogVolume" type="FogVolume" parent="NavigationRegion3D/StaticBody3D/Shard6"]
 shape = 0
@@ -187,7 +188,7 @@ material = SubResource("FogMaterial_muem4")
 [node name="Shard8" parent="NavigationRegion3D/StaticBody3D" groups=["Shard"] instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.7, -6)
 texture = ExtResource("12_gqmmt")
-shard_name = "好的碎片"
+shard_name = "酋长碎片"
 
 [node name="FogVolume" type="FogVolume" parent="NavigationRegion3D/StaticBody3D/Shard8"]
 shape = 0
