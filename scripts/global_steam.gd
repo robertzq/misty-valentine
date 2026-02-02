@@ -3,12 +3,13 @@ extends Node
 # 你的 Steam App ID (在 Steamworks 后台可以看到)
 # 测试时可以用 480 (这是 Steam 的官方测试用 ID，叫 Spacewar)
 # 正式上线前一定要改成你自己的！
-const APP_ID: int = 4267110 
+const APP_ID: int = 4285700 
 
 var is_on_steam: bool = false
 
 func _ready() -> void:
-	_initialize_steam()
+	return
+	#_initialize_steam()
 
 func _initialize_steam() -> void:
 	# 1. 检查是否是 Steam 环境
