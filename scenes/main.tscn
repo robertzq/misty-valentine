@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dx310jfly4spd" path="res://textures/painting_parts/part_8.png" id="12_gqmmt"]
 [ext_resource type="Texture2D" uid="uid://cq5ghojmhtpbh" path="res://textures/painting_parts/part_9.png" id="13_yc10j"]
 [ext_resource type="PackedScene" uid="uid://dc78d68445pbs" path="res://scenes/Ghost.tscn" id="14_a8y0u"]
-[ext_resource type="Script" uid="uid://83v1xuyowb23" path="res://scripts/HUD.gd" id="15_jkv2x"]
+[ext_resource type="Script" path="res://scripts/HUD.gd" id="15_jkv2x"]
 [ext_resource type="PackedScene" uid="uid://b8yvvagv5apex" path="res://scenes/Chest.tscn" id="16_jbj1t"]
 [ext_resource type="AudioStream" uid="uid://cwnr37fruhtyi" path="res://assets/forget_me_not.mp3" id="18_dp3eg"]
 
@@ -291,6 +291,7 @@ label_settings = SubResource("LabelSettings_dp3eg")
 
 [node name="bgmPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("18_dp3eg")
+volume_db = -6.0
 
 [editable path="Chest"]
 [editable path="Chest/chest_gold2"]
